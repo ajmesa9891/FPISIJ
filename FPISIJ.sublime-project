@@ -1,0 +1,10 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+			"folder_exclude_patterns": ["node_modules", "resources", "www", "lib"]
+		}
+	],
+	"tab_size": 2
+}
