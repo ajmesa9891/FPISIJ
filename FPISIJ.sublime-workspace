@@ -1,0 +1,502 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"answ",
+				"answer4"
+			],
+			[
+				"ans",
+				"answer2"
+			],
+			[
+				"handl",
+				"handleGameFormSubmitted"
+			],
+			[
+				"submi",
+				"onGameFormSubmitted"
+			],
+			[
+				"addG",
+				"AddGameForm"
+			],
+			[
+				"image",
+				"imageUrl"
+			],
+			[
+				"ha",
+				"handleSubmit"
+			],
+			[
+				"hand",
+				"handleAddGame"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"ima",
+				"imageUrl"
+			],
+			[
+				"propT",
+				"propTypes"
+			],
+			[
+				"padding",
+				"padding-top"
+			],
+			[
+				"pop",
+				"propTypes"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "SpecRunner.html",
+			"settings":
+			{
+				"buffer_size": 703,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 73.0,
+		"last_filter": "word",
+		"selected_items":
+		[
+			[
+				"word",
+				"Word Wrap: Toggle"
+			],
+			[
+				"prefere",
+				"Preferences: Settings - User"
+			],
+			[
+				"project ",
+				"Project: Edit Project"
+			],
+			[
+				"linter",
+				"SublimeLinter: Disable Linter"
+			],
+			[
+				"lint",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"tabs",
+				"View: Toggle Tabs"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"pack remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"spell ",
+				"Google Spell Check"
+			],
+			[
+				"isntall pa",
+				"Package Control: Install Package"
+			],
+			[
+				"pack in",
+				"Package Control: Install Package"
+			],
+			[
+				"tab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"edit pr",
+				"Project: Edit Project"
+			],
+			[
+				"edit",
+				"Project: Edit Project"
+			],
+			[
+				"edit ",
+				"Project: Edit Project"
+			],
+			[
+				"lint thi",
+				"SublimeLinter: Lint This View"
+			],
+			[
+				"packa insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 571.0
+	},
+	"console":
+	{
+		"height": 576.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/proj/FPISIJ"
+	],
+	"file_history":
+	[
+		"/C/proj/FPISIJ/SpecRunner.html",
+		"/C/proj/FPISIJ/FPISIJ.sublime-project",
+		"/C/proj/angular code school/angular-code-school.sublime-project",
+		"/C/proj/angular code school/app.js",
+		"/C/proj/angular code school/index.html",
+		"/C/proj/FPISIJ/bower.json",
+		"/C/proj/aniwell/touchstone-starter.sublime-project",
+		"/C/proj/reacteu-app/src/js/views/onboarding/enter-code.js",
+		"/C/proj/reacteu-app/src/js/views/people/person.js",
+		"/C/proj/reacteu-app/src/js/views/people/index.js",
+		"/C/proj/reacteu-app/src/js/app.js",
+		"/C/proj/reacteu-app/node_modules/touchstonejs-tasks/index.js",
+		"/C/proj/reacteu-app/gulpfile.js",
+		"/C/proj/reacteu-app/src/js/touchstone/index.js",
+		"/C/proj/reacteu-app/touchstone-starter.sublime-project",
+		"/C/Users/alejandrom/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/proj/aniwell/src/js/app.js",
+		"/C/proj/aniwell/src/js/views/transitions-target-over.js",
+		"/C/proj/touchstonejs-starter-original/touchstone-starter.sublime-project",
+		"/C/proj/touchstonejs-starter/package.json",
+		"/C/proj/dedonde/app/components/home/Sub.jsx",
+		"/C/proj/dedonde/app/components/Find.jsx",
+		"/C/proj/dedonde/app/components/find/home/Sub.jsx",
+		"/C/proj/dedonde/app/components/find/Home.jsx",
+		"/C/proj/dedonde/app/components/Home.jsx",
+		"/C/proj/dedonde/flickrapp.sublime-project",
+		"/C/proj/aniwell/aniwell.sublime-workspace",
+		"/C/proj/aniwell/aniwell.sublime-project",
+		"/C/proj/kitchen-sink/package.json",
+		"/C/proj/kitchen-sink/kitchen-sink.sublime-project",
+		"/C/proj/flickrapp/flickrapp.sublime-project",
+		"/C/proj/flickrapp/app/components/home/Sub.jsx",
+		"/C/proj/flickrapp/app/app.js",
+		"/C/proj/flickrapp/app/components/Home.jsx",
+		"/C/proj/kitchen-sink/output",
+		"/C/proj/kitchen-sink/output.txt",
+		"/C/proj/flickrapp/app/components/App.jsx",
+		"/C/Users/alejandrom/Downloads/react-0.13.3/react-0.13.3/experiments/Author Quiz/app.js",
+		"/C/Users/alejandrom/Downloads/react-0.13.3/react-0.13.3/experiments/Author Quiz/index.html",
+		"/C/Users/alejandrom/Downloads/react-0.13.3/react-0.13.3/experiments/Author Quiz/css/app.css",
+		"/C/Projects/UltiPro.NET/UltiPro.Net.build",
+		"/C/Users/alejandrom/Downloads/react-0.13.3/react-0.13.3/experiments/0/index.html",
+		"/C/Users/alejandrom/Downloads/react-0.13.3/react-0.13.3/experiments/Author Quiz/thirdparty/bootstrap/js/jquery.js",
+		"/C/Users/alejandrom/Downloads/react-0.13.3/react-0.13.3/examples/basic/index.html",
+		"/C/Projects/UltiPro.NET/UltiPro.Net.Full.build",
+		"/C/Projects/UltiPro.NET/UltiPro.Net.Full2.build",
+		"/C/Projects/UltiPro.NET/WebSites/UltiProNet/Web.config",
+		"/C/Projects/Remove IE Spellcheck.patch",
+		"/C/Projects/UltiPro.NET/AutomatedTests/Jasmine/UltiProNet/tests/Talent/spec/budgetSummaryGridTests.unitBudgets.js",
+		"/C/Projects/UltiPro.NET/AutomatedTests/Jasmine/UltiProNet/tests/Talent/spec/salaryPlanWorksheetBudgetsGridTests.js",
+		"/C/Users/alejandrom/Desktop/Shortcuts/Quick Site Changer/QuickSiteChanger.exe.config",
+		"/C/Users/alejandrom/Downloads/EnvironmentWarmup/EnvironmentWarmup.exe.config",
+		"/C/Users/alejandrom/Downloads/EnvironmentWarmup/WarmupActionMapping.txt",
+		"/C/Users/alejandrom/Downloads/EnvironmentWarmup/WarmupList.txt",
+		"/C/Users/alejandrom/Downloads/EnvironmentWarmup/WebDriver.xml",
+		"/C/Users/alejandrom/Downloads/EnvironmentWarmup/System.Web.Http.xml",
+		"/C/Users/alejandrom/Downloads/EnvironmentWarmup/System.Net.Http.Formatting.xml",
+		"/C/Users/alejandrom/PluralSight/Hardcore Functional Javascript/notes.txt",
+		"/C/Users/alejandrom/PluralSight/Hardcore Functional Javascript/Hardcore Functional Javascript.sublime-project"
+	],
+	"find":
+	{
+		"height": 43.0
+	},
+	"find_in_files":
+	{
+		"height": 117.0,
+		"where_history":
+		[
+			"*.js",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"talent",
+			"h1",
+			"handleFormInput",
+			"input",
+			"refs.input",
+			"this.refs.input",
+			"Enter Code",
+			"props",
+			"touchstone",
+			":8000",
+			"viewMa",
+			"context",
+			"app",
+			");\n",
+			"tabviewcontro",
+			"Home",
+			"",
+			"reapp-pack",
+			"",
+			"error",
+			"",
+			"photos",
+			"child",
+			"viewlistprops",
+			"render",
+			"selectGame",
+			"getdo",
+			"getdon",
+			"Image URL",
+			"imageUrl",
+			"showcontinue",
+			"delete",
+			"Delete this highlight",
+			"dele",
+			"Read more at",
+			"Add a note",
+			"onbooksele",
+			"showcontinue",
+			"bgClass",
+			"\n		{\n			name: 'Stephen King',\n			imageUrl: 'images/authors/stephenking.jpg',\n			imageSource: 'Wikimedia Commons',\n			imageAttributtion: 'Pinguino',\n			books: ['The Shining', 'IT']\n		},",
+			"\n		{\n			name: 'J.K. Rowling',\n			imageUrl: 'images/authors/jkrowling.jpg',\n			imageSource: 'Wikimedia Commons',\n			imageAttributtion: 'Daniel Ogren',\n			books: ['Harry Potter and the Sorcerers Stone']\n		},",
+			"\n ",
+			"\"",
+			">\n",
+			"render",
+			"posi",
+			"compile",
+			"batch",
+			"services.sln",
+			"services.sl",
+			"describe",
+			"$",
+			"wi"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "SpecRunner.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 703,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								703,
+								703
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "FPISIJ.sublime-project",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"specrun",
+				"SpecRunner.html"
+			],
+			[
+				"specrunn",
+				"SpecRunner.html"
+			],
+			[
+				"onboardingjs",
+				"src\\js\\views\\onboarding\\enter-code.js"
+			],
+			[
+				"touchstone-tasks/index",
+				"node_modules\\touchstonejs-tasks\\index.js"
+			],
+			[
+				"touchstoneindex",
+				"src\\js\\touchstone\\index.js"
+			],
+			[
+				"app.",
+				"src\\js\\app.js"
+			],
+			[
+				"transitions-target-over",
+				"src\\js\\views\\transitions-target-over.js"
+			],
+			[
+				"app.js",
+				"src\\js\\app.js"
+			],
+			[
+				"sub",
+				"app\\components\\find\\Sub.jsx"
+			],
+			[
+				"home.j",
+				"app\\components\\find\\Home.jsx"
+			],
+			[
+				"home",
+				"app\\components\\Home.jsx"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"app",
+				"app\\app.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 625.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 475.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 275.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
