@@ -14,14 +14,14 @@ describe("Chapter 1", function() {
 });
 //Chapter 2
 //---------------------
-describe("Chapter 2", function() {
+describe("Chapter 2", () => {
   // ### Exercise 2.1
   // Write a recursive function to get the nth Fibonacci number (http://mng.bz/C29s).
   // The first two Fibonacci numbers are 0 and 1. The nth number is always the sum of the
   // previous two—the sequence begins 0, 1, 1, 2, 3, 5. Your definition should use a
   // local tail-recursive function.
   // def fib(n: Int): Int
-  it("Exercise 2.1", function() {
+  xit("Exercise 2.1", () => {
   //   ````scala
   // def fib(n: Int): Int = {
   //   @annotation.tailrec
@@ -31,7 +31,7 @@ describe("Chapter 2", function() {
   //   loop(n, 0, 1)
   // }
   //   ````
-  // fib1 seems more succint.
+  // fib1 seems more succint, thought it cannot take advantage of tail end recursion.
     function fib1(n) {
       if (n < 2) return n;
       return fib1(n-1) + fib1(n-2);
@@ -61,5 +61,4 @@ describe("Chapter 2", function() {
     expect(fib2(5)).toBe(5);
     expect(fib2(6)).toBe(8);
   });
-
 });

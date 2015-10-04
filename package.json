@@ -1,0 +1,43 @@
+{
+  "name": "FPISIJ",
+  "version": "0.0.0",
+  "description": "Functional Programming In Scala In Javascript. Based on the book \"Functional Programming in Scala\".",
+  "main": "start.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "generate:docco": "docco --output \"docco output\" exercises.js",
+    "generate:exercises.html": "npm run generate:docco && node start.js",
+    "watch-regenerate": "onchange exercises.js -- npm run generate:exercises.html",
+    "livereload": "livereloadx --port 9091 --exclude \"*.js\" --exclude \"docco output\\*\" .",
+    "start": "npm run generate:exercises.html && parallelshell \"npm run livereload\" \"npm run watch-regenerate\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ajmesa9891/FPISIJ.git"
+  },
+  "keywords": [
+    "functional",
+    "programming",
+    "scala",
+    "javascript"
+  ],
+  "author": "Alejandro Mesa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajmesa9891/FPISIJ/issues"
+  },
+  "homepage": "https://github.com/ajmesa9891/FPISIJ",
+  "dependencies": {
+    "bower": "^1.5.3",
+    "cheerio": "^0.19.0",
+    "docco": "^0.7.0",
+    "fs": "0.0.2",
+    "livereloadx": "^0.3.8",
+    "onchange": "^2.0.0",
+    "parallelshell": "^2.0.0",
+    "path": "^0.12.7"
+  }
+}
