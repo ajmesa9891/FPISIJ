@@ -21,7 +21,7 @@ describe("Chapter 2", () => {
   // previous two—the sequence begins 0, 1, 1, 2, 3, 5. Your definition should use a
   // local tail-recursive function.
   // def fib(n: Int): Int
-  xit("Exercise 2.1", () => {
+  it("Exercise 2.1", () => {
   //   ````scala
   // def fib(n: Int): Int = {
   //   @annotation.tailrec
