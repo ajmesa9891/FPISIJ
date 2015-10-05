@@ -1,0 +1,4 @@
+/node_modules/*
+/docco output/*
+/bower_components/*
+exercises.html
