@@ -243,8 +243,14 @@ describe("Chapter 3", () => {
     // ````scala
     // def foldLeftViaFoldRight[A,B](l: List[A], z: B)(f: (B,A) => B): B = 
     //   foldRight(l, (b:B) => b)((a,g) => b => g(f(b,a)))(z)
+    //
+    // def foldRightViaFoldLeft_1[A,B](l: List[A], z: B)(f: (A,B) => B): B = 
+    //   foldLeft(l, (b:B) => b)((g,a) => b => g(f(a,b)))(z)
+    //
+    // def foldLeftViaFoldRight[A,B](l: List[A], z: B)(f: (B,A) => B): B = 
+    //   foldRight(l, (b:B) => b)((a,g) => b => g(f(b,a)))(z)
     // ````
-    // It's crazy to see how much types get in the "visual" way. They do
+    // It's crazy to see how much types get in the "visual" way. They do add
     // rigor and may foster understanding. It's an interesting comparison.
     // Reduce can be implemented with both left and right fold, as seen 
     // in Exercise 3.12. I'm taking advatange of that.
@@ -256,14 +262,39 @@ describe("Chapter 3", () => {
     expect(reduceLeftViaRight(R.add, '00', ['a', 'b'])).toBe('00ab');
 
     function reduceRightViaLeft(f, acc, ls) {
-
+      return R.reduce(f, acc, R.reverse(ls));
     }
 
-
+    expect(reduceRightViaLeft(R.add, '', ['a', 'b'])).toBe('ba');
+    expect(reduceRightViaLeft(R.add, '00', ['a', 'b'])).toBe('00ba');    
   });
 
+  // ### EXERCISE 3.14
+  // Implement append in terms of either ````foldLeft````
+  // or ````foldRight````.
+  // ````
+  // def appendViaFoldRight[A](l: List[A], r: List[A]): List[A] = 
+  //   foldRight(l, r)(Cons(_,_))
+  // ````
+  it('Exercise 3.14', () => {
+    var append = R.reduce((ns, v) => { return ns.concat(v) });
 
+    expect(append([0], [1,2,3])).toEqual([0,1,2,3]);
+  });
+
+  // ### EXERCISE 3.15
+  // Hard: Write a function that concatenates a list of lists into a single list.
+  // Its runtime should be linear in the total length of all lists.
+  // Try to use functions we have already defined.
+  // ````scala
+  // def concat[A](l: List[List[A]]): List[A] = 
+  //   foldRight(l, Nil:List[A])(append)
+  // ````
+  it('Exercise 3.15', () => {
+    var flatten = R.reduce(
+      (acc, xs) => acc.concat(xs),
+      []);
+
+    expect(flatten([[1,2], [3,4]])).toEqual([1,2,3,4]);
+  });
 });
-
-
-
