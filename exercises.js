@@ -5,6 +5,7 @@
 
 // ***
 // *I'm skipping many problems and focusing only in ones I'm interested on.*
+// Also, testing is not the main point so the tests are very superficial.
 // ***
 
 //Chapter 1
@@ -291,10 +292,90 @@ describe("Chapter 3", () => {
   //   foldRight(l, Nil:List[A])(append)
   // ````
   it('Exercise 3.15', () => {
-    var flatten = R.reduce(
-      (acc, xs) => acc.concat(xs),
-      []);
+    var flatten = R.reduce(R.concat, []);
 
     expect(flatten([[1,2], [3,4]])).toEqual([1,2,3,4]);
+  });
+
+  // ### Exercise 3.16
+  // Write a function that transforms a list of integers by adding 1 to each element.
+  // (Reminder: this should be a pure function that returns a new List!)
+  // ````scala
+  // def add1(l: List[Int]): List[Int] = 
+  //   foldRight(l, Nil:List[Int])((h,t) => Cons(h+1,t))
+  // ````
+  it('Exercise 3.16', () => {
+    var plus1 = R.reduce((acc, n) => acc.concat(n+1), []);
+
+    var original = [1,2,3];
+    expect(plus1(original)).toEqual([2,3,4]);
+    expect(original).toEqual([1,2,3]);
+  });
+
+  // ### Exerxise 3.17
+  // Write a function that turns each value in a List[Double] into a String. You can use
+  // the expression d.toString to convert some d: Double to a String.
+  // ````scala
+  // def doubleToString(l: List[Double]): List[String] = 
+  //   foldRight(l, Nil:List[String])((h,t) => Cons(h.toString,t))
+  // ````
+  it('Exercise 3.17', () => {
+    var doubleToString = R.reduce((acc, n) => acc.concat(n.toString()), []);
+
+    expect(doubleToString([1,2,3])).toEqual(['1', '2', '3']);
+  });
+
+  // ### Exercise 3.18
+  // Write a function map that generalizes modifying each element in a list while maintaining
+  // the structure of the list. Here is its signature:12
+  // ````scala def map[A,B](as: List[A])(f: A => B): List[B] ````
+  // ````scala
+  // def map[A,B](l: List[A])(f: A => B): List[B] = 
+  //   foldRight(l, Nil:List[B])((h,t) => Cons(f(h),t))
+  //
+  // def map_1[A,B](l: List[A])(f: A => B): List[B] = 
+  //   foldRightViaFoldLeft(l, Nil:List[B])((h,t) => Cons(f(h),t))
+  //
+  // def map_2[A,B](l: List[A])(f: A => B): List[B] = {
+  //   val buf = new collection.mutable.ListBuffer[B]
+  //   def go(l: List[A]): Unit = l match {
+  //     case Nil => ()
+  //     case Cons(h,t) => buf += f(h); go(t)
+  //   }
+  //   go(l)
+  //   List(buf.toList: _*) // converting from the standard Scala list to the list we've defined here
+  // }
+  // ````
+  it('Exercise 3.18', () => {
+    function map(f, xs) {
+      return R.reduce((acc, x) => acc.concat(f(x)), [], xs);
+    }
+
+    expect(map(R.add(10), [1,2,3])).toEqual([11,12,13]);
+  });
+
+  // ### Exercise 3.19
+  // Write a function filter that removes elements from a list unless they satisfy a given
+  // predicate. Use it to remove all odd numbers from a ```` List[Int] ````.
+  //
+  // ```` def filter[A](as: List[A])(f: A => Boolean): List[A] ````
+  xit('Exercise 3.19', () => {
+
+    // CONTINUE HERE
+
+    function filter(f, xs) {
+      return R.reduce(
+        (acc, x) => { 
+          if(f(x)) acc.concat(x);
+          return acc;
+        },
+        [],
+        xs);
+    }
+
+    var isEven = (n) => n % 2 === 0;
+    expect(isEven(2)).toBeTruthy()
+    expect(isEven(3)).toBeFalsy()
+    expect(filter(isEven, [1,2,3,4,5,6])).toEqual([2,4,6]);
   });
 });
