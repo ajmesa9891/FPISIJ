@@ -16,6 +16,8 @@ fs.readFile(docoHtmlPath, function (err, html) {
 	$ = cheerio.load(html);
 	$('link[rel="stylesheet"]').attr("href", doccoOutputFolder + "/docco.css");
 	$('head')
+		.append('\n  <!-- Imports Section -->')
+		.append('\n  <script src="bower_components/ramda/dist/ramda.js"></script>')
 		.append('\n  <!-- Jasmine Section -->')
 		.append('\n  <link rel="stylesheet" href="bower_components/jasmine-core/lib/jasmine-core/jasmine.css">')
 		.append('\n  ')
