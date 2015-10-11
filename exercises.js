@@ -8,7 +8,7 @@
 // Also, testing is not the main point so the tests are very superficial.
 // ***
 
-//Chapter 1
+//Chapter 1 What is functional programming?
 //---------------------
 // No exercises.
 describe("Chapter 1", function() {
@@ -18,7 +18,7 @@ describe("Chapter 1", function() {
   });
 
 });
-//Chapter 2
+//Chapter 2 Getting started with functional programming in Scala
 //---------------------
 describe("Chapter 2", () => {
   // ### Exercise 2.1
@@ -104,7 +104,7 @@ describe("Chapter 2", () => {
   // I did not find it interesting to continue working on this chapter.
   // ***
 });
-//Chapter 3
+//Chapter 3 Functional data structures
 //---------------------
 describe("Chapter 3", () => {
 
@@ -358,15 +358,17 @@ describe("Chapter 3", () => {
   // Write a function filter that removes elements from a list unless they satisfy a given
   // predicate. Use it to remove all odd numbers from a ```` List[Int] ````.
   //
-  // ```` def filter[A](as: List[A])(f: A => Boolean): List[A] ````
-  xit('Exercise 3.19', () => {
-
-    // CONTINUE HERE
+  // ````scala def filter[A](as: List[A])(f: A => Boolean): List[A] ````
+  // ````scala
+  // def filter[A](l: List[A])(f: A => Boolean): List[A] = 
+  //   foldRight(l, Nil:List[A])((h,t) => if (f(h)) Cons(h,t) else t)
+  // ````
+  it('Exercise 3.19', () => {
 
     function filter(f, xs) {
       return R.reduce(
         (acc, x) => { 
-          if(f(x)) acc.concat(x);
+          if(f(x)) acc = acc.concat(x);
           return acc;
         },
         [],
@@ -377,5 +379,115 @@ describe("Chapter 3", () => {
     expect(isEven(2)).toBeTruthy()
     expect(isEven(3)).toBeFalsy()
     expect(filter(isEven, [1,2,3,4,5,6])).toEqual([2,4,6]);
+  });
+
+  // ### Exercise 3.20
+  // Write a function ```` flatMap ```` that works like map except
+  // that the function given will return a list instead of a single result,
+  // and that list should be inserted into the final resulting list.
+  // Here is its signature:
+  // ````scala 
+  // def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] 
+  // ````
+  // For instance, 
+  // ````scala flatMap(List(1,2,3))(i => List(i,i)) ````
+  // should result in ````scala List(1,1,2,2,3,3) ```` . 
+  // ````scala
+  // def flatMap[A,B](l: List[A])(f: A => List[B]): List[B] = 
+  //   concat(map(l)(f))
+  // ````
+  it('Exercise 3.20', () => {
+    var flatMap = (f, xs) => {
+      return R.reduce(
+        (acc, x) => acc.concat(f(x)),
+        [],
+        xs);
+    };
+
+    var flatMap2 = (f, xs) => R.flatten(R.map(f, xs));
+
+    var duplicate = (n) => [n, n];
+    expect(flatMap(duplicate, [1,2,3])).toEqual([1,1,2,2,3,3]);
+    expect(flatMap2(duplicate, [1,2,3])).toEqual([1,1,2,2,3,3]);
+  });
+
+  // ### Exercise 3.21
+  // Use ````flatMap```` [(````R.chain````)] to implement ````filter````.
+  // ````scala
+  // def filterViaFlatMap[A](l: List[A])(f: A => Boolean): List[A] =
+  //   flatMap(l)(a => if (f(a)) List(a) else Nil)
+  // ````
+  it('Exercise 3.21', () => {
+    var filter = (f, xs) => R.chain((x) => f(x) ? [x] : [], xs);
+
+    var isEven = (n) => n % 2 === 0;
+    expect(isEven(2)).toBeTruthy()
+    expect(isEven(3)).toBeFalsy()
+    expect(filter(isEven, [1,2,3,4,5,6])).toEqual([2,4,6]);
+  });
+
+  // ### Exercise 3.22
+  // Write a function that accepts two lists and constructs a new list by 
+  // adding corresponding elements. For example, 
+  // ````scala List(1,2,3) ````
+  // and ````scala List(4,5,6) ```` become ````scala List(5,7,9) ````.
+  // ````scala
+  // def addPairwise(a: List[Int], b: List[Int]): List[Int] = (a,b) match {
+  //   case (Nil, _) => Nil
+  //   case (_, Nil) => Nil
+  //   case (Cons(h1,t1), Cons(h2,t2)) => Cons(h1+h2, addPairwise(t1,t2))
+  // }
+  // ````
+  it('Exercise 3.22', () => {
+    var t = (l1, l2) => R.map(R.apply(R.add), R.zip(l1,l2));
+
+    expect(t([1,2,3], [4,5,6])).toEqual([5,7,9]);
+  });
+
+  // ### Exercise 3.23
+  // Generalize the function you just wrote so that it’s not specific to
+  // integers or addition. Name your generalized 
+  // function ````scala zipWith ````.
+  // ````scala
+  // def zipWith[A,B,C](a: List[A], b: List[B])(f: (A,B) => C): List[C] = (a,b) match {
+  //   case (Nil, _) => Nil
+  //   case (_, Nil) => Nil
+  //   case (Cons(h1,t1), Cons(h2,t2)) => Cons(f(h1,h2), zipWith(t1,t2)(f))
+  // }
+  // ````
+  it('Exercise 3.23', () => {
+    var zipWith = (f, l1, l2) => R.map(R.apply(f), R.zip(l1, l2));
+
+    expect(zipWith(R.add, [1,2,3], [4,5,6])).toEqual([5,7,9]);
+  });
+
+  // ### Exercise 3.24
+  // Hard: As an example, implement ```` hasSubsequence ```` for checking 
+  // whether a ```` List ```` contains another ```` List ```` as a subsequence.
+  // For instance, ```` List(1,2,3,4) ```` would have 
+  // ````List(1,2) ````, ```` List(2,3) ````, and ```` List(4) ```` as
+  // subsequences, among others. You may have some difficulty finding a
+  // concise purely functional implementation that is also efficient.
+  // That’s okay. Implement the function however comes most naturally. 
+  // We’ll return to this implementation in chapter 5 and hopefully 
+  // improve on it. Note: Any two values x and y can be compared for
+  // equality in Scala using the expression x == y.
+  // ````scala 
+  // def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean
+  // ````
+  // ````scala
+
+  // ````
+  it('Exercise 3.24', () => {
+    
+  });
+
+  // ### Exercise 
+  // 
+  // ````scala
+
+  // ````
+  it('Exercise ', () => {
+
   });
 });
