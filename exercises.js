@@ -476,9 +476,45 @@ describe("Chapter 3", () => {
   // def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean
   // ````
   // ````scala
-
+  // def startsWith[A](l: List[A], prefix: List[A]): Boolean = (l,prefix) match {
+  //   case (_,Nil) => true
+  //   case (Cons(h,t),Cons(h2,t2)) if h == h2 => startsWith(t, t2)
+  //   case _ => false
+  // }
+  // @annotation.tailrec
+  // def hasSubsequence[A](l: List[A], sub: List[A]): Boolean = l match {
+  //   case Nil => false
+  //   case Cons(h,t) if startsWith(l, sub) => true
+  //   case Cons(h,t) => hasSubsequence(t, sub)  
+  // }
   // ````
   it('Exercise 3.24', () => {
+    function startsWith(l, sub) {
+      if (R.isEmpty(sub)) return true;
+      if (l[0] === sub[0]) return startsWith(R.drop(1, l), R.drop(1, sub));
+      return false;
+    }
+
+    function hasSub(l, sub) {
+      if (R.isEmpty(l)) return false;
+      return startsWith(l, sub) || hasSub(R.drop(1, l), sub);
+    }
+
+    expect(hasSub([1,2,3], [1,2])).toBeTruthy();
+    expect(hasSub([1,2,3], [1,2,3])).toBeTruthy();
+    expect(hasSub([1,2,3,4,5], [3,4])).toBeTruthy();
+    
+    expect(hasSub([1,2,3,4,5], [4,3])).toBeFalsy();
+    expect(hasSub([1,2,3,4,5], [0,1,2,3])).toBeFalsy();
+  });
+
+  // ### Exercise 3.25
+  // Write a function ```` size ```` that counts the number of nodes
+  // (leaves and branches) in a tree.
+  // ````scala
+
+  // ````
+  it('Exercise 3.25', () => {
     
   });
 
