@@ -607,6 +607,11 @@ describe("Chapter 3", () => {
         this.r = r;
       }
     }
+
+    window.Tree = Tree2;
+    window.Leaf = Leaf2;
+    window.Branch = Branch2;
+
     // The implementation is slightly nicer, but it does add quite a bit of noise
     // to the classes. I'm split as to which way to pick, but I don't think
     // it's important.
@@ -643,12 +648,198 @@ describe("Chapter 3", () => {
   
 
   // ### Exercise 3.26
-  // 
+  // Write a function ```` maximum ```` that returns the maximum element in a
+  // ```` Tree[Int] ````.
   // ````scala
-
+  // def maximum(t: Tree[Int]): Int = t match {
+  //   case Leaf(n) => n
+  //   case Branch(l,r) => maximum(l) max maximum(r)
+  // }
   // ````
+  // Again, same inadequacy as in exercise 3.25. I'm not going to keep
+  // writing about it, but it's something to keep in mind.
   it('Exercise 3.26', () => {
-    // TODO Continue here
+    function maximum(tree) {
+      if (tree.constructor.isLeaf()) return tree.value;
+      if (tree.constructor.isBranch()) 
+        return R.max(maximum(tree.l), maximum(tree.r));
+    }
+
+    var t1 = new Leaf(4);
+    expect(maximum(t1)).toBe(4);
+    var t3 = 
+    new Branch(
+      new Branch(
+        new Leaf(20),
+        new Leaf(10)), 
+      new Branch(
+        new Branch(
+          new Leaf(1),
+          new Branch(
+            new Leaf(898),
+            new Leaf(109))),
+        new Leaf(7908)));
+    expect(maximum(t3)).toBe(7908);
+  });
+
+  // ### Exercise 3.27
+  // Write a function ```` depth ```` that returns the maximum path length
+  // from the root of a tree to any leaf.
+  // ````scala
+  // def depth[A](t: Tree[A]): Int = t match {
+  //   case Leaf(_) => 0
+  //   case Branch(l,r) => 1 + (depth(l) max depth(r))
+  // }
+  // ````
+  it('Exercise 3.27', () => {
+    function depth(tree) {
+      if (tree.constructor.isLeaf()) return 0;
+      if (tree.constructor.isBranch())
+        return 1 + R.max(depth(tree.l), depth(tree.r));
+    }
+
+    var t1 = new Leaf(4);
+    expect(depth(t1)).toBe(0);
+    var t3 = 
+    new Branch(
+      new Branch(
+        new Leaf(20),
+        new Leaf(10)), 
+      new Branch(
+        new Branch(
+          new Leaf(1),
+          new Branch(
+            new Leaf(898),
+            new Leaf(109))),
+        new Leaf(7908)));
+    expect(depth(t3)).toBe(4);
+  });
+
+  // ### Exercise 3.28
+  // Write a function ```` map ````, analogous to the method of the same name
+  // on ```` List ````, that modifies each element in a tree with
+  // a given function.
+  // ````scala
+  // def map[A,B](t: Tree[A])(f: A => B): Tree[B] = t match {
+  //   case Leaf(a) => Leaf(f(a))
+  //   case Branch(l,r) => Branch(map(l)(f), map(r)(f))
+  // }
+  // ````
+  it('Exercise 3.28', () => {
+    function map(f, tree) {
+      if (tree.constructor.isLeaf())
+        return new Leaf(f(tree.value));
+      if (tree.constructor.isBranch())
+        return new Branch(map(f, tree.l), map(f, tree.r));
+    }
+
+    var t1 = new Leaf(4);
+    expect(map(R.add(1), t1)).toEqual(new Leaf(5));
+
+    var t3 = 
+    new Branch(
+      new Branch(
+        new Leaf(20),
+        new Leaf(10)), 
+      new Branch(
+        new Branch(
+          new Leaf(1),
+          new Branch(
+            new Leaf(898),
+            new Leaf(109))),
+        new Leaf(7908)));
+    var t3Plus1 = 
+    new Branch(
+      new Branch(
+        new Leaf(21),
+        new Leaf(11)), 
+      new Branch(
+        new Branch(
+          new Leaf(2),
+          new Branch(
+            new Leaf(899),
+            new Leaf(110))),
+        new Leaf(7909)));
+    expect(map(R.add(1), t3)).toEqual(t3Plus1);
+  });
+
+  // ### Exercise 3.29
+  // Generalize ```` size ````, ```` maximum ````, ```` depth ````, and
+  // ```` map ````, writing a new function ```` fold ```` that abstracts
+  // over their similarities. Reimplement them in terms of this more
+  // general function. Can you draw an analogy between this ```` fold ````
+  // function and the left and right folds for ```` List ````?
+  it('Exercise 3.29', () => {
+    // ````scala
+    // def fold[A,B](t: Tree[A])(f: A => B)(g: (B,B) => B): B = t match {
+    //   case Leaf(a) => f(a)
+    //   case Branch(l,r) => g(fold(l)(f)(g), fold(r)(f)(g))
+    // }
+    // ````
+    function fold(m, f, tree) {
+      if (tree.constructor.isLeaf())
+        return m(tree);
+      if (tree.constructor.isBranch()){
+        return f(f(m(tree), fold(m, f, tree.l)), fold(m, f, tree.r));
+      }
+    }
+
+    fold = R.curry(fold);
+
+    // ````scala
+    // def sizeViaFold[A](t: Tree[A]): Int = 
+    //   fold(t)(a => 1)(1 + _ + _)
+    // ````
+    var size = fold(t => 1)(R.add);
+
+    var t1 = new Branch(new Leaf(2), new Leaf(10));
+    expect(size(t1)).toBe(3);
+    var t2 = new Leaf(1);
+    expect(size(t2)).toBe(1);
+    var t3 = 
+    new Branch(
+      new Branch(
+        new Leaf(2),
+        new Leaf(10)), 
+      new Branch(
+        new Branch(
+          new Leaf(1),
+          new Branch(
+            new Leaf(898),
+            new Leaf(1209))),
+        new Leaf(7908)));
+    expect(size(t3)).toBe(11);
+
+    // I cannot simply use ```` R.prop('value') ```` because ```` R.max ````
+    // value may be undefined and ```` R.max(undefined, x) ```` is always
+    // undefined. So I had to default to a minimum value so undefined
+    // is turned to ```` Number.MIN_VALUE ````.
+    // ````scala
+    // def maximumViaFold(t: Tree[Int]): Int = 
+    //   fold(t)(a => a)(_ max _)
+    // ````
+    var getValue = R.pipe(R.prop('value'), R.defaultTo(Number.MIN_VALUE));
+    var maximum = fold(getValue)(R.max);
+    
+
+    var t1 = new Leaf(4);
+    expect(maximum(t1)).toBe(4);
+    var t3 = 
+    new Branch(
+      new Branch(
+        new Leaf(20),
+        new Leaf(10)), 
+      new Branch(
+        new Branch(
+          new Leaf(1),
+          new Branch(
+            new Leaf(898),
+            new Leaf(109))),
+        new Leaf(7908)));
+    expect(maximum(t3)).toBe(7908);
+
+    // I thnink this is enough, so I won't continue implementing the other
+    // functions.
   });
 
   // ### Exercise 
