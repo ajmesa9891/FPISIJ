@@ -1,3 +1,4 @@
+"use strict";
 //Functional Programming In Scala In Javascript
 //=============================================
 //Functional Programming In Scala In Javascript.
@@ -18,6 +19,7 @@ describe("Chapter 1", function() {
   });
 
 });
+
 //Chapter 2 Getting started with functional programming in Scala
 //---------------------
 describe("Chapter 2", () => {
@@ -511,11 +513,142 @@ describe("Chapter 3", () => {
   // ### Exercise 3.25
   // Write a function ```` size ```` that counts the number of nodes
   // (leaves and branches) in a tree.
+  it('Exercise 3.25', () => {
+    // For this exercise we need to first define Tree, Leaf, and Branch in
+    // Javascript. Here is how the book defines it in Scala:
+    // ````scala
+    // sealed trait Tree[+A]
+    // case class Leaf[A](value: A) extends Tree[A]
+    // case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
+    // ````
+    // In Scala, functions would be able to pattern match the subclasses
+    // and change behavior based on that. I don't know of a simlar construct
+    // in Javascript. I'm using classes and instanceof, you should let me
+    // know if there's a better alternative!
+    class Tree { };
+    class Leaf extends Tree {
+      constructor(value) { 
+        super();
+        this.value = value; 
+      }
+    }
+    class Branch extends Tree {
+      constructor(l, r) { 
+        super();
+        this.l = l; 
+        this.r = r;
+      }
+    }
+    // Javascript seems nasty and inadequate here. There's too much noise,
+    // and the lack of types reduces rigor and understanding to new
+    // readers. Let's try to solve the problem now.
+    function size(tree) {
+      if (tree instanceof Leaf) return 1;
+      if (tree instanceof Branch) return 1 + size(tree.l) + size(tree.r);
+    }
+    // ````scala
+    // def size[A](t: Tree[A]): Int = t match {
+    //   case Leaf(_) => 1
+    //   case Branch(l,r) => 1 + size(l) + size(r)
+    // }
+    // ````
+    // Visually the Javascript implementation of size is not terrible (but
+    // the implementation of Tree, Leaf, and Branch are). And even beyond the
+    // visual aspect, the Scala implementation is guaranteed to have a case
+    // for any given input. The Javascript implementation would "silently"
+    // fail when given, say, a Monkey instead of a Branch.
+    //
+    // This adds to the lack of rigor caused by Javascript's typeless nature.
+    // I would research for alternatives that compile down to Javascript, but
+    // I'm going to keep this a purely Javascript solution for now.
+    var t1 = new Branch(new Leaf(2), new Leaf(10));
+    expect(size(t1)).toBe(3);
+    var t2 = new Leaf(1);
+    expect(size(t2)).toBe(1);
+    var t3 = 
+    new Branch(
+      new Branch(
+        new Leaf(2),
+        new Leaf(10)), 
+      new Branch(
+        new Branch(
+          new Leaf(1),
+          new Branch(
+            new Leaf(898),
+            new Leaf(1209))),
+        new Leaf(7908)));
+    expect(size(t3)).toBe(11);
+
+    // The Folktale library deals with it by adding a ```` isType ```` 
+    // method to the super class. For example, the ```` Either ````
+    // has subclasses ```` Left ```` and ```` Right ```` and properties 
+    // ```` isLeft ```` and ```` isRight ````. In our case, that would add
+    // even more noise to the Tree/Branch/Leaf implementations, 
+    // but it does make it a bit nicer to write client implementations.
+    // Let's try it out.
+    class Tree2 {
+      static isLeaf() { return false; }
+      static isBranch() { return false; }
+    };
+    class Leaf2 extends Tree2 {
+      static isLeaf() { return true; }
+
+      constructor(value) { 
+        super();
+        this.value = value; 
+      }
+    }
+    class Branch2 extends Tree2 {
+      static isBranch() { return true; }
+
+      constructor(l, r) { 
+        super();
+        this.l = l; 
+        this.r = r;
+      }
+    }
+    // The implementation is slightly nicer, but it does add quite a bit of noise
+    // to the classes. I'm split as to which way to pick, but I don't think
+    // it's important.
+    //
+    // It may be worth skipping the class definitions to take advantage
+    // of mixins with the prototype. I may look into this at a later point.
+    // The idea is there may be a mixin we can write that adds this details
+    // to the prototype of any class automatically.
+    function size2(tree) {
+      if (tree.constructor.isLeaf()) return 1;
+      if (tree.constructor.isBranch()) return 1 + size2(tree.l) + size2(tree.r);
+    }
+
+    t1 = new Branch2(new Leaf2(2), new Leaf2(10));
+    expect(size2(t1)).toBe(3);
+    t2 = new Leaf2(1);
+    expect(size2(t2)).toBe(1);
+    t3 = 
+    new Branch2(
+      new Branch2(
+        new Leaf2(2),
+        new Leaf2(10)), 
+      new Branch2(
+        new Branch2(
+          new Leaf2(1),
+          new Branch2(
+            new Leaf2(898),
+            new Leaf2(1209))),
+        new Leaf2(7908)));
+    expect(size2(t3)).toBe(11);
+
+  });
+
+  
+
+  // ### Exercise 3.26
+  // 
   // ````scala
 
   // ````
-  it('Exercise 3.25', () => {
-    
+  it('Exercise 3.26', () => {
+    // TODO Continue here
   });
 
   // ### Exercise 
@@ -526,4 +659,9 @@ describe("Chapter 3", () => {
   it('Exercise ', () => {
 
   });
+
+  //TODO
+  //=============================================
+  // * Write blog post on setup.
+  // * Write blog post on exercise 3.25 + prototype mixins + other alternatives.
 });
