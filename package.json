@@ -7,7 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "bower install && npm run generate:bundle",
+    "generate:bundle": "browserify libs.js -o bundle.js",
     "generate:docco": "docco --output \"docco output\" exercises.js",
     "generate:exercises.html": "npm run generate:docco && node start.js",
     "watch-regenerate": "onchange exercises.js -- npm run generate:exercises.html",
@@ -32,7 +33,9 @@
   "homepage": "https://github.com/ajmesa9891/FPISIJ",
   "dependencies": {
     "bower": "^1.5.3",
+    "browserify": "^11.2.0",
     "cheerio": "^0.19.0",
+    "data.maybe": "^1.2.1",
     "docco": "^0.7.0",
     "fs": "0.0.2",
     "livereloadx": "^0.3.8",

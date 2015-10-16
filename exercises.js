@@ -841,18 +841,150 @@ describe("Chapter 3", () => {
     // I thnink this is enough, so I won't continue implementing the other
     // functions.
   });
+});
+
+
+//Chapter 4 Handling errors without exceptions
+//---------------------
+
+describe("Chapter 4", function() {
+
+  // ### Exercise 4.1
+  // Implement all of the preceding functions on ```` Option ```` .
+  // As you implement each function, try to think about what it means and
+  // in what situations you’d use it. We’ll explore when
+  // to use each of these functions next.
+  it('Exercise 4.1', () => {
+    // Folktale's ```` data.maybe ```` is the equivalent of 
+    // ```` Option ```` in scala. I'm 
+    // using ````data.maybe ```` in most exercises. Here I'm implementing 
+    // it myself to implement the functions that are already in
+    // ```` data.maybe ````'s prototype.
+    class Maybe {
+      static isNothing() { return false; }
+      static isJust() { return false; }
+
+      // ````scala
+      // def getOrElse[B>:A](default: => B): B = this match {
+      //   case None => default
+      //   case Some(a) => a
+      // }
+      // ````
+      getOrElse(def) {
+        if (this.constructor.isNothing()) return def;
+        if (this.constructor.isJust()) return this.value;
+      }
+
+      // ````scala
+      // def orElse_1[B>:A](ob: => Option[B]): Option[B] = this match {
+      //   case None => ob 
+      //   case _ => this
+      // }
+      // ````
+      orElse(getMaybe) {
+        if (this.constructor.isNothing()) return getMaybe();
+        if (this.constructor.isJust()) return this;
+      }
+
+      // ````scala
+      // def map[B](f: A => B): Option[B] = this match {
+      //   case None => None
+      //   case Some(a) => Some(f(a))
+      // }
+      // ````
+      map(f) {
+        if (this.constructor.isNothing()) return this;
+        if (this.constructor.isJust()) return new Just(f(this.value));
+      }
+
+      // ````scala
+      // def flatMap[B](f: A => Option[B]): Option[B] = 
+      //   map(f) getOrElse None
+      // ````
+      // The above is a better way to solve this problem. And Scala and
+      // languages where everything is curried lend itself to these type of
+      // solutions, though it can also be done in Javascript.
+      flatMap(f) {
+        if (this.constructor.isNothing()) return this;
+        if (this.constructor.isJust()) return f(this.value);
+      }
+
+      //````scala
+      // def filter_1(f: A => Boolean): Option[A] =
+      //   flatMap(a => if (f(a)) Some(a) else None)
+      //````
+      filter(p) {
+        return this.flatMap((v) => p(v) ? new Just(v) : new Nothing());
+      }
+    }
+    class Nothing extends Maybe {
+      static isNothing() { return true; }
+
+      constructor() { super(); }
+    }
+    class Just extends Maybe {
+      static isJust() { return true; }
+
+      constructor(value) {
+        super();
+        this.value = value;
+      }
+    }
+
+    // Overall I think the Javascript implementations are good and not
+    // awkward; it feels like any other functional language.
+    // My main worry is the lack of rigor that comes with no types.
+    // The functions that get passed in are expected to have a certain
+    // signatures but they are not defined explicitely and there's no compiler
+    // to enforce strictness. This has its advatages, sepcially for fast
+    // prototypes, but I have found it to be dangerous in large projects.
+    expect(new Nothing().getOrElse(10)).toBe(10);
+    expect(new Just(87).getOrElse(10)).toBe(87);
+
+    expect(new Nothing().orElse(() => new Just(10)).getOrElse(1))
+      .toEqual(10);
+    expect(new Just(33).orElse(() => new Just(22)).getOrElse(1))
+      .toEqual(33);
+    expect(new Just(88).orElse(() => new Nothing()).getOrElse(1))
+      .toEqual(88);
+
+    expect(new Nothing().map(v => v)).toEqual(new Nothing());
+    expect(new Just(3).map(v => v + 3)).toEqual(new Just(6));
+
+    expect(new Nothing().flatMap(v => new Just(v))).toEqual(new Nothing());
+    expect(new Just(3).flatMap(v => new Just(v + 3))).toEqual(new Just(6));
+    expect(new Just(3).flatMap(v => new Nothing())).toEqual(new Nothing());
+
+    expect(new Nothing().filter(R.equals(1))).toEqual(new Nothing());
+    expect(new Just(2).filter(R.equals(1))).toEqual(new Nothing());
+    expect(new Just(1).filter(R.equals(1))).toEqual(new Just(1));
+  });
+
+  // ### Exercise 4.2
+  // Implement the ```` variance ```` function in terms of ```` flatMap ````.
+  // If the mean of a sequence is ```` m ````, the variance is the mean of
+  // ```` math.pow(x - m, 2) ```` for each element ```` x ```` in the sequence.
+  // See the definition of variance on Wikipedia (http://mng.bz/0Qsr).
+  // ````scala
+  // def variance(xs: Seq[Double]): Option[Double] 
+  // ````
+  // ````scala
+  // ````
+  it('Exercise 4.2', () => {
+
+  });
 
   // ### Exercise 
   // 
   // ````scala
-
   // ````
   it('Exercise ', () => {
 
   });
-
-  //TODO
-  //=============================================
-  // * Write blog post on setup.
-  // * Write blog post on exercise 3.25 + prototype mixins + other alternatives.
 });
+
+//TODO
+//=============================================
+// * Write blog post on setup.
+// * Write blog post on exercise 3.25 + prototype mixins + other alternatives.
+// * Could write about exercise in 4.1
