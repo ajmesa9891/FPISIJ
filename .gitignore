@@ -2,3 +2,4 @@
 /docco output/*
 /bower_components/*
 exercises.html
+bundle.js
