@@ -1,7 +1,7 @@
 "use strict";
-//Functional Programming In Scala In Javascript
+//Functional Programming In Scala In JavaScript
 //=============================================
-//Functional Programming In Scala In Javascript.
+//Functional Programming In Scala In JavaScript.
 //Based on the book "Functional Programming in Scala".
 
 // ***
@@ -145,7 +145,7 @@ describe("Chapter 3", () => {
   // def length[A](as: List[A]): Int
   // ````
   it('Exercise 3.9', () => {
-    // Functions in Ramda (R) is curried. Here Javascript seems more succint
+    // Functions in Ramda (R) is curried. Here JavaScript seems more succint
     // and elegant. Though part of it is due to lack of type syntax.
     var length = R.reduceRight(R.add(1))(0);
     
@@ -194,7 +194,7 @@ describe("Chapter 3", () => {
   // ````
   // Scala's pattern-matching-looking-shortcuts are very expressive
   // and I don't think the same level of shorthanded expressiveness
-  // is achievable in Javascript. Thankfully we can wrap those in a
+  // is achievable in JavaScript. Thankfully we can wrap those in a
   // well named function (e.g., ````R.add````) and make it even more readable.
   it('Exercise 3.11', () => {
     var sum = R.reduce(R.add, 0);
@@ -224,7 +224,7 @@ describe("Chapter 3", () => {
   //   foldLeft(l, List[A]())((acc,h) => Cons(h,acc))
   // ````
   // The way arrays can be constructed in Scala leads to a more natural
-  // foldLeft solution. I initially did a reduceRight in Javascript, and
+  // foldLeft solution. I initially did a reduceRight in JavaScript, and
   // implemented the one with reduceLeft after.
   it('Exercise 3.12', () => {
     var reverse = R.reduceRight((acc, x) => acc.concat(x), []);
@@ -515,7 +515,7 @@ describe("Chapter 3", () => {
   // (leaves and branches) in a tree.
   it('Exercise 3.25', () => {
     // For this exercise we need to first define Tree, Leaf, and Branch in
-    // Javascript. Here is how the book defines it in Scala:
+    // JavaScript. Here is how the book defines it in Scala:
     // ````scala
     // sealed trait Tree[+A]
     // case class Leaf[A](value: A) extends Tree[A]
@@ -523,7 +523,7 @@ describe("Chapter 3", () => {
     // ````
     // In Scala, functions would be able to pattern match the subclasses
     // and change behavior based on that. I don't know of a simlar construct
-    // in Javascript. I'm using classes and instanceof, you should let me
+    // in JavaScript. I'm using classes and instanceof, you should let me
     // know if there's a better alternative!
     class Tree { };
     class Leaf extends Tree {
@@ -539,7 +539,7 @@ describe("Chapter 3", () => {
         this.r = r;
       }
     }
-    // Javascript seems nasty and inadequate here. There's too much noise,
+    // JavaScript seems nasty and inadequate here. There's too much noise,
     // and the lack of types reduces rigor and understanding to new
     // readers. Let's try to solve the problem now.
     function size(tree) {
@@ -552,15 +552,15 @@ describe("Chapter 3", () => {
     //   case Branch(l,r) => 1 + size(l) + size(r)
     // }
     // ````
-    // Visually the Javascript implementation of size is not terrible (but
+    // Visually the JavaScript implementation of size is not terrible (but
     // the implementation of Tree, Leaf, and Branch are). And even beyond the
     // visual aspect, the Scala implementation is guaranteed to have a case
-    // for any given input. The Javascript implementation would "silently"
+    // for any given input. The JavaScript implementation would "silently"
     // fail when given, say, a Monkey instead of a Branch.
     //
-    // This adds to the lack of rigor caused by Javascript's typeless nature.
-    // I would research for alternatives that compile down to Javascript, but
-    // I'm going to keep this a purely Javascript solution for now.
+    // This adds to the lack of rigor caused by JavaScript's typeless nature.
+    // I would research for alternatives that compile down to JavaScript, but
+    // I'm going to keep this a purely JavaScript solution for now.
     var t1 = new Branch(new Leaf(2), new Leaf(10));
     expect(size(t1)).toBe(3);
     var t2 = new Leaf(1);
@@ -903,7 +903,7 @@ describe("Chapter 4", function() {
       // ````
       // The above is a better way to solve this problem. And Scala and
       // languages where everything is curried lend itself to these type of
-      // solutions, though it can also be done in Javascript.
+      // solutions, though it can also be done in JavaScript.
       flatMap(f) {
         if (this.constructor.isNothing()) return this;
         if (this.constructor.isJust()) return f(this.value);
@@ -931,7 +931,7 @@ describe("Chapter 4", function() {
       }
     }
 
-    // Overall I think the Javascript implementations are good and not
+    // Overall I think the JavaScript implementations are good and not
     // awkward; it feels like any other functional language.
     // My main worry is the lack of rigor that comes with no types.
     // The functions that get passed in are expected to have a certain
@@ -958,6 +958,61 @@ describe("Chapter 4", function() {
     expect(new Nothing().filter(R.equals(1))).toEqual(new Nothing());
     expect(new Just(2).filter(R.equals(1))).toEqual(new Nothing());
     expect(new Just(1).filter(R.equals(1))).toEqual(new Just(1));
+
+
+    // To be more concrete, this is a possible application of the Maybe
+    // construct.
+    function getAge(id) {
+      return id == 1 ? new Just(10) : new Nothing();
+    }
+
+    var getBirthdayMessage = function (id) {
+      return getAge(id)
+        .map(age => "Happy birthday! You/re now " + age)
+        .getOrElse("Could you please update your profile?");
+    }
+
+    expect(getBirthdayMessage(1)).toBe("Happy birthday! You/re now 10");
+    expect(getBirthdayMessage(2)).toBe("Could you please update your profile?");
+
+    // This is another way to approach the problem: separate the functions
+    // from the class definition and have them take a data (objects).
+    // This allows for easier composition through piping of functions,
+    // as seen in the new definition of the getBirthdayMessage. We no longer
+    // even need to explicitely create a function.
+
+    var lib = {
+      getOrElse: R.curry(function(def, maybe) {
+        if (maybe.constructor.isNothing()) return def;
+        if (maybe.constructor.isJust()) return maybe.value;
+      }),
+
+      orElse: R.curry(function(getMaybe, maybe) {
+        if (maybe.constructor.isNothing()) return getMaybe();
+        if (maybe.constructor.isJust()) return maybe;
+      }),
+
+      map: R.curry(function(f, maybe) {
+        if (maybe.constructor.isNothing()) return maybe;
+        if (maybe.constructor.isJust()) return new Just(f(maybe.value));
+      }),
+
+      flatMap: R.curry(function(f, maybe) {
+        if (maybe.constructor.isNothing()) return maybe;
+        if (maybe.constructor.isJust()) return f(maybe.value);
+      }),
+
+      filter: R.curry(function(p, maybe) {
+        return maybe.flatMap((v) => p(v) ? new Just(v) : new Nothing());
+      })
+    };
+
+    getBirthdayMessage = R.pipe(getAge,
+      lib.map(age => "Happy birthday! You/re now " + age),
+      lib.getOrElse("Could you please update your profile?"));
+
+    expect(getBirthdayMessage(1)).toBe("Happy birthday! You/re now 10");
+    expect(getBirthdayMessage(2)).toBe("Could you please update your profile?");
   });
 
   // ### Exercise 4.2
@@ -985,6 +1040,6 @@ describe("Chapter 4", function() {
 
 //TODO
 //=============================================
-// * Write blog post on setup.
 // * Write blog post on exercise 3.25 + prototype mixins + other alternatives.
-// * Could write about exercise in 4.1
+// * Write blog post on exercise in 4.1
+// * Use TypeScript and reconsider the type issues.
