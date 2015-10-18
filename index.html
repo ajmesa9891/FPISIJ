@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Functional Programming In Scala In Javascript</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco output/docco.css">
+
+  <!-- Imports Section -->
+  <script src="bower_components/ramda/dist/ramda.js"></script>
+  <script src="bundle.js"></script>
+  <!-- Jasmine Section -->
+  <link rel="stylesheet" href="bower_components/jasmine-core/lib/jasmine-core/jasmine.css">
+  
+  <script src="bower_components/jasmine-core/lib/jasmine-core/jasmine.js"></script>
+  <script src="bower_components/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
+  <script src="bower_components/jasmine-core/lib/jasmine-core/boot.js"></script>
+  
+  <script src="exercises.js"></script>
+  <!-- END Jasmine Section -->
+  <script src="http://localhost:9091/livereload.js"></script></head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#xB6;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class="highlight"><pre><span class="hljs-pi">&quot;use strict&quot;</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#xB6;</a>
+              </div>
+              <h1 id="functional-programming-in-scala-in-javascript">Functional Programming In Scala In Javascript</h1>
+<p>Functional Programming In Scala In Javascript.
+Based on the book &#x201C;Functional Programming in Scala&#x201D;.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#xB6;</a>
+              </div>
+              <hr>
+<p><em>I&#x2019;m skipping many problems and focusing only in ones I&#x2019;m interested on.</em>
+Also, testing is not the main point so the tests are very superficial.</p>
+<hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#xB6;</a>
+              </div>
+              <h2 id="chapter-1-what-is-functional-programming-">Chapter 1 What is functional programming?</h2>
+<p>No exercises.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>describe(<span class="hljs-string">&quot;Chapter 1&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+  it(<span class="hljs-string">&quot;has no exercises.&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    expect(<span class="hljs-number">1</span>).toBe(<span class="hljs-number">1</span>);
+  });
+
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#xB6;</a>
+              </div>
+              <h2 id="chapter-2-getting-started-with-functional-programming-in-scala">Chapter 2 Getting started with functional programming in Scala</h2>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>describe(<span class="hljs-string">&quot;Chapter 2&quot;</span>, () =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#xB6;</a>
+              </div>
+              <h3 id="exercise-2-1">Exercise 2.1</h3>
+<p>Write a recursive function to get the nth Fibonacci number (<a href="http://mng.bz/C29s">http://mng.bz/C29s</a>).
+The first two Fibonacci numbers are 0 and 1. The nth number is always the sum of the
+previous two&#x2014;the sequence begins 0, 1, 1, 2, 3, 5. Your definition should use a
+local tail-recursive function.
+<code>scala def fib(n: Int): Int</code></p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&quot;Exercise 2.1&quot;</span>, () =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#xB6;</a>
+              </div>
+              <pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span>(</span>n: <span class="hljs-type">Int</span>): <span class="hljs-type">Int</span> = {
+  <span class="hljs-annotation">@annotation</span>.tailrec
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">loop</span>(</span>n: <span class="hljs-type">Int</span>, prev: <span class="hljs-type">Int</span>, cur: <span class="hljs-type">Int</span>): <span class="hljs-type">Int</span> =
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) prev
+    <span class="hljs-keyword">else</span> loop(n - <span class="hljs-number">1</span>, cur, prev + cur)
+  loop(n, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)
+}
+</code></pre>
+<p>fib1 seems more succint, thought it cannot take advantage of tail end recursion.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib1</span>(<span class="hljs-params">n</span>) </span>{
+      <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> n;
+      <span class="hljs-keyword">return</span> fib1(n-<span class="hljs-number">1</span>) + fib1(n-<span class="hljs-number">2</span>);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib2</span>(<span class="hljs-params">n</span>) </span>{
+      <span class="hljs-keyword">var</span> loop = (n, prev, cur) =&gt; {
+        <span class="hljs-keyword">if</span> (n === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> prev;
+        <span class="hljs-keyword">return</span> loop(n - <span class="hljs-number">1</span>, cur, prev + cur);
+      };
+      <span class="hljs-keyword">return</span> loop(n, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+    }
+
+    expect(fib1(<span class="hljs-number">0</span>)).toBe(<span class="hljs-number">0</span>);
+    expect(fib1(<span class="hljs-number">1</span>)).toBe(<span class="hljs-number">1</span>);
+    expect(fib1(<span class="hljs-number">2</span>)).toBe(<span class="hljs-number">1</span>);
+    expect(fib1(<span class="hljs-number">3</span>)).toBe(<span class="hljs-number">2</span>);
+    expect(fib1(<span class="hljs-number">4</span>)).toBe(<span class="hljs-number">3</span>);
+    expect(fib1(<span class="hljs-number">5</span>)).toBe(<span class="hljs-number">5</span>);
+    expect(fib1(<span class="hljs-number">6</span>)).toBe(<span class="hljs-number">8</span>);
+
+    expect(fib2(<span class="hljs-number">0</span>)).toBe(<span class="hljs-number">0</span>);
+    expect(fib2(<span class="hljs-number">1</span>)).toBe(<span class="hljs-number">1</span>);
+    expect(fib2(<span class="hljs-number">2</span>)).toBe(<span class="hljs-number">1</span>);
+    expect(fib2(<span class="hljs-number">3</span>)).toBe(<span class="hljs-number">2</span>);
+    expect(fib2(<span class="hljs-number">4</span>)).toBe(<span class="hljs-number">3</span>);
+    expect(fib2(<span class="hljs-number">5</span>)).toBe(<span class="hljs-number">5</span>);
+    expect(fib2(<span class="hljs-number">6</span>)).toBe(<span class="hljs-number">8</span>);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#xB6;</a>
+              </div>
+              <h3 id="exercise-2-2">Exercise 2.2</h3>
+<p>Implement isSorted, which checks whether an Array[A] is sorted according to a
+given comparison function:
+<code>scala def isSorted[A](as: Array[A], ordered: (A,A) =&gt; Boolean): Boolean</code></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#xB6;</a>
+              </div>
+              <pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isSorted</span>[</span><span class="hljs-type">A</span>](as: <span class="hljs-type">Array</span>[<span class="hljs-type">A</span>], gt: (<span class="hljs-type">A</span>,<span class="hljs-type">A</span>) =&gt; <span class="hljs-type">Boolean</span>): <span class="hljs-type">Boolean</span> = {
+  <span class="hljs-annotation">@annotation</span>.tailrec
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">go</span>(</span>i: <span class="hljs-type">Int</span>, prev: <span class="hljs-type">A</span>): <span class="hljs-type">Boolean</span> =
+    <span class="hljs-keyword">if</span> (i == as.length) <span class="hljs-literal">true</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (gt(as(i), prev)) go(i + <span class="hljs-number">1</span>, as(i))
+    <span class="hljs-keyword">else</span> <span class="hljs-literal">false</span>
+  <span class="hljs-keyword">if</span> (as.length == <span class="hljs-number">0</span>) <span class="hljs-literal">true</span>
+  <span class="hljs-keyword">else</span> go(<span class="hljs-number">1</span>, as(<span class="hljs-number">0</span>))
+}
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>
+  it(<span class="hljs-string">&apos;Exercise 2.2&apos;</span>, () =&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isSorted</span>(<span class="hljs-params">as, gt</span>) </span>{
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">as</span>.length &lt; <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (gt(<span class="hljs-keyword">as</span>[<span class="hljs-number">1</span>], <span class="hljs-keyword">as</span>[<span class="hljs-number">0</span>])) {
+        <span class="hljs-keyword">var</span> rest = R.drop(<span class="hljs-number">1</span>, <span class="hljs-keyword">as</span>);
+        <span class="hljs-keyword">return</span> isSorted(rest, gt);
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+
+    expect(isSorted([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>], R.gte)).toBeTruthy();
+    expect(isSorted([<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>], R.gte)).toBeTruthy();
+    expect(isSorted([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>], R.gte)).toBeFalsy();
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#xB6;</a>
+              </div>
+              <hr>
+<p>I did not find it interesting to continue working on this chapter.</p>
+<hr>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#xB6;</a>
+              </div>
+              <h2 id="chapter-3-functional-data-structures">Chapter 3 Functional data structures</h2>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>describe(<span class="hljs-string">&quot;Chapter 3&quot;</span>, () =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-1">Exercise 3.1</h3>
+<p>What will be the result of the following match expression?</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">val</span> <span class="hljs-title">x</span> =</span> <span class="hljs-type">List</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>) <span class="hljs-keyword">match</span> {
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Cons</span>(x, <span class="hljs-type">Cons</span>(<span class="hljs-number">2</span>, <span class="hljs-type">Cons</span>(<span class="hljs-number">4</span>, _))) =&gt; x
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Nil</span> =&gt; <span class="hljs-number">42</span>
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Cons</span>(x, <span class="hljs-type">Cons</span>(y, <span class="hljs-type">Cons</span>(<span class="hljs-number">3</span>, <span class="hljs-type">Cons</span>(<span class="hljs-number">4</span>, _)))) =&gt;x+y
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Cons</span>(h, t) =&gt; h + sum(t)
+  <span class="hljs-keyword">case</span> _ =&gt; <span class="hljs-number">101</span>
+}
+`
+</code></pre>
+<p>This level of destructing seems completely possible with ES6.
+I think this feature is only available in FF at the time of writing.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.1&apos;</span>, () =&gt; {
+    <span class="hljs-keyword">var</span> answer = <span class="hljs-number">3</span>;
+    expect(<span class="hljs-number">3</span>).toBe(<span class="hljs-number">3</span>);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-2">Exercise 3.2</h3>
+<p>Implement the function tail for removing the first element of a List. Note that the
+function takes constant time. What are different choices you could make in your
+implementation if the List is Nil? We&#x2019;ll return to this question in the next chapter.</p>
+<hr>
+<p>This is supposed to be a destructuring problem. I solved it in Scala
+since this feature of ES6 is not in Chrome yet.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.2&apos;</span>, () =&gt; {
+    expect(<span class="hljs-literal">true</span>).toBeTruthy();   
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-9">Exercise 3.9</h3>
+<p>Compute the length of a list using foldRight.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">length</span>[</span><span class="hljs-type">A</span>](as: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>]): <span class="hljs-type">Int</span>
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.9&apos;</span>, () =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#xB6;</a>
+              </div>
+              <p>Functions in Ramda (R) is curried. Here Javascript seems more succint
+and elegant. Though part of it is due to lack of type syntax.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    <span class="hljs-keyword">var</span> length = R.reduceRight(R.add(<span class="hljs-number">1</span>))(<span class="hljs-number">0</span>);
+    
+    expect(length([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])).toBe(<span class="hljs-number">4</span>);
+    expect(length([])).toBe(<span class="hljs-number">0</span>);
+    expect(length([<span class="hljs-string">&apos;a,b&apos;</span>, <span class="hljs-string">&apos;second&apos;</span>])).toBe(<span class="hljs-number">2</span>);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#xB6;</a>
+              </div>
+              <pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">length</span>[</span><span class="hljs-type">A</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>]): <span class="hljs-type">Int</span> = 
+foldRight(l, <span class="hljs-number">0</span>)((_,acc) =&gt; acc + <span class="hljs-number">1</span>)
+</code></pre>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-10">Exercise 3.10</h3>
+<p>Our implementation of foldRight is not tail-recursive and will result in a StackOverflowError
+for large lists (we say it&#x2019;s not stack-safe). Convince yourself that this is the
+case, and then write another general list-recursion function, foldLeft, that is
+tail-recursive, using the techniques we discussed in the previous chapter. Here is its
+signature:</p>
+<p><code>scala def foldLeft[A,B](as: List[A], z: B)(f: (B, A) =&gt; B): B</code></p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.10&apos;</span>, () =&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foldLeft</span>(<span class="hljs-params">as, z, f</span>) </span>{
+      <span class="hljs-keyword">if</span> (R.length(<span class="hljs-keyword">as</span>) === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> z;
+      <span class="hljs-keyword">var</span> rest = R.drop(<span class="hljs-number">1</span>, <span class="hljs-keyword">as</span>);
+      <span class="hljs-keyword">return</span> foldLeft(rest, f(z, <span class="hljs-keyword">as</span>[<span class="hljs-number">0</span>]), f);
+    }
+
+    expect(foldLeft([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], <span class="hljs-number">0</span>, R.add)).toBe(<span class="hljs-number">6</span>);
+    expect(foldLeft([<span class="hljs-string">&apos;1&apos;</span>,<span class="hljs-string">&apos;2&apos;</span>,<span class="hljs-string">&apos;3&apos;</span>], <span class="hljs-number">0</span>, R.add)).toBe(<span class="hljs-string">&apos;0123&apos;</span>);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#xB6;</a>
+              </div>
+              <pre><code class="lang-scala"><span class="hljs-annotation">@annotation</span>.tailrec
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foldLeft</span>[</span><span class="hljs-type">A</span>,<span class="hljs-type">B</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>], z: <span class="hljs-type">B</span>)(f: (<span class="hljs-type">B</span>, <span class="hljs-type">A</span>) =&gt; <span class="hljs-type">B</span>): <span class="hljs-type">B</span> = l <span class="hljs-keyword">match</span> { 
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Nil</span> =&gt; z
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Cons</span>(h,t) =&gt; foldLeft(t, f(z,h))(f)
+}
+</code></pre>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-11">Exercise 3.11</h3>
+<p>Write sum, product, and a function to compute the length of
+a list using foldLeft.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sum3</span>(</span>l: <span class="hljs-type">List</span>[<span class="hljs-type">Int</span>]) = foldLeft(l, <span class="hljs-number">0</span>)(_ + _)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">product3</span>(</span>l: <span class="hljs-type">List</span>[<span class="hljs-type">Double</span>]) = foldLeft(l, <span class="hljs-number">1.0</span>)(_ * _)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">length2</span>[</span><span class="hljs-type">A</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>]): <span class="hljs-type">Int</span> = foldLeft(l, <span class="hljs-number">0</span>)((acc,h) =&gt; acc + <span class="hljs-number">1</span>)
+</code></pre>
+<p>Scala&#x2019;s pattern-matching-looking-shortcuts are very expressive
+and I don&#x2019;t think the same level of shorthanded expressiveness
+is achievable in Javascript. Thankfully we can wrap those in a
+well named function (e.g., <code>R.add</code>) and make it even more readable.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.11&apos;</span>, () =&gt; {
+    <span class="hljs-keyword">var</span> sum = R.reduce(R.add, <span class="hljs-number">0</span>);
+
+    expect(sum([<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>])).toBe(<span class="hljs-number">3</span>);
+    expect(sum([<span class="hljs-number">10</span>, -<span class="hljs-number">15</span>])).toBe(-<span class="hljs-number">5</span>);
+    expect(sum([])).toBe(<span class="hljs-number">0</span>);
+
+    <span class="hljs-keyword">var</span> product = R.reduce(R.multiply, <span class="hljs-number">1</span>);
+
+    expect(product([<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>])).toBe(<span class="hljs-number">1</span>);
+    expect(product([<span class="hljs-number">10</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>])).toBe(<span class="hljs-number">0</span>);
+    expect(product([<span class="hljs-number">10</span>,<span class="hljs-number">10</span>,<span class="hljs-number">5</span>])).toBe(<span class="hljs-number">500</span>);
+
+    <span class="hljs-keyword">var</span> length = R.reduce(R.add(<span class="hljs-number">1</span>), <span class="hljs-number">0</span>);
+
+    expect(length([<span class="hljs-number">10</span>])).toBe(<span class="hljs-number">1</span>);
+    expect(length([<span class="hljs-number">10</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>,<span class="hljs-string">&apos;12&apos;</span>,{}])).toBe(<span class="hljs-number">10</span>);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-12">Exercise 3.12</h3>
+<p>Write a function that returns the reverse of a list 
+(given <code>List(1,2,3)</code> it returns
+<code>List(3,2,1))</code>. See if you can write it using a fold.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse</span>[</span><span class="hljs-type">A</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>]): <span class="hljs-type">List</span>[<span class="hljs-type">A</span>] = 
+  foldLeft(l, <span class="hljs-type">List</span>[<span class="hljs-type">A</span>]())((acc,h) =&gt; <span class="hljs-type">Cons</span>(h,acc))
+</code></pre>
+<p>The way arrays can be constructed in Scala leads to a more natural
+foldLeft solution. I initially did a reduceRight in Javascript, and
+implemented the one with reduceLeft after.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.12&apos;</span>, () =&gt; {
+    <span class="hljs-keyword">var</span> reverse = R.reduceRight((acc, x) =&gt; acc.concat(x), []);
+    <span class="hljs-keyword">var</span> reverse2 = R.reduce((acc, x) =&gt; [x].concat(acc), [])
+
+    expect(reverse([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])).toEqual([<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>]);
+    expect(reverse([])).toEqual([]);
+
+    expect(reverse2([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])).toEqual([<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>]);
+    expect(reverse2([])).toEqual([]);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-13">Exercise 3.13</h3>
+<p>Hard: Can you write foldLeft in terms of foldRight? How about the other way
+around? Implementing foldRight via foldLeft is useful because it lets us 
+implement foldRight tail-recursively, which means it works even for large
+lists without overflowing the stack.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.13&apos;</span>, () =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#xB6;</a>
+              </div>
+              <pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foldLeftViaFoldRight</span>[</span><span class="hljs-type">A</span>,<span class="hljs-type">B</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>], z: <span class="hljs-type">B</span>)(f: (<span class="hljs-type">B</span>,<span class="hljs-type">A</span>) =&gt; <span class="hljs-type">B</span>): <span class="hljs-type">B</span> = 
+  foldRight(l, (b:<span class="hljs-type">B</span>) =&gt; b)((a,g) =&gt; b =&gt; g(f(b,a)))(z)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foldRightViaFoldLeft_1</span>[</span><span class="hljs-type">A</span>,<span class="hljs-type">B</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>], z: <span class="hljs-type">B</span>)(f: (<span class="hljs-type">A</span>,<span class="hljs-type">B</span>) =&gt; <span class="hljs-type">B</span>): <span class="hljs-type">B</span> = 
+  foldLeft(l, (b:<span class="hljs-type">B</span>) =&gt; b)((g,a) =&gt; b =&gt; g(f(a,b)))(z)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foldLeftViaFoldRight</span>[</span><span class="hljs-type">A</span>,<span class="hljs-type">B</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>], z: <span class="hljs-type">B</span>)(f: (<span class="hljs-type">B</span>,<span class="hljs-type">A</span>) =&gt; <span class="hljs-type">B</span>): <span class="hljs-type">B</span> = 
+  foldRight(l, (b:<span class="hljs-type">B</span>) =&gt; b)((a,g) =&gt; b =&gt; g(f(b,a)))(z)
+</code></pre>
+<p>It&#x2019;s crazy to see how much types get in the &#x201C;visual&#x201D; way. They do add
+rigor and may foster understanding. It&#x2019;s an interesting comparison.
+Reduce can be implemented with both left and right fold, as seen 
+in Exercise 3.12. I&#x2019;m taking advatange of that.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reduceLeftViaRight</span>(<span class="hljs-params">f, acc, ls</span>) </span>{
+      <span class="hljs-keyword">return</span> R.reduceRight(f, acc, R.reverse(ls));
+    }
+
+    expect(reduceLeftViaRight(R.add, <span class="hljs-string">&apos;&apos;</span>, [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>])).toBe(<span class="hljs-string">&apos;ab&apos;</span>);
+    expect(reduceLeftViaRight(R.add, <span class="hljs-string">&apos;00&apos;</span>, [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>])).toBe(<span class="hljs-string">&apos;00ab&apos;</span>);
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reduceRightViaLeft</span>(<span class="hljs-params">f, acc, ls</span>) </span>{
+      <span class="hljs-keyword">return</span> R.reduce(f, acc, R.reverse(ls));
+    }
+
+    expect(reduceRightViaLeft(R.add, <span class="hljs-string">&apos;&apos;</span>, [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>])).toBe(<span class="hljs-string">&apos;ba&apos;</span>);
+    expect(reduceRightViaLeft(R.add, <span class="hljs-string">&apos;00&apos;</span>, [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>])).toBe(<span class="hljs-string">&apos;00ba&apos;</span>);    
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-14">EXERCISE 3.14</h3>
+<p>Implement append in terms of either <code>foldLeft</code>
+or <code>foldRight</code>.</p>
+<pre><code>def appendViaFoldRight[A](l: List[A], r: List[A]): List[A] = 
+  foldRight(l, r)(Cons(_,_))
+</code></pre>
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.14&apos;</span>, () =&gt; {
+    <span class="hljs-keyword">var</span> append = R.reduce((ns, v) =&gt; { <span class="hljs-keyword">return</span> ns.concat(v) });
+
+    expect(append([<span class="hljs-number">0</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])).toEqual([<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-15">EXERCISE 3.15</h3>
+<p>Hard: Write a function that concatenates a list of lists into a single list.
+Its runtime should be linear in the total length of all lists.
+Try to use functions we have already defined.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">concat</span>[</span><span class="hljs-type">A</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-type">A</span>]]): <span class="hljs-type">List</span>[<span class="hljs-type">A</span>] = 
+  foldRight(l, <span class="hljs-type">Nil</span>:<span class="hljs-type">List</span>[<span class="hljs-type">A</span>])(append)
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.15&apos;</span>, () =&gt; {
+    <span class="hljs-keyword">var</span> flatten = R.reduce(R.concat, []);
+
+    expect(flatten([[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]])).toEqual([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-16">Exercise 3.16</h3>
+<p>Write a function that transforms a list of integers by adding 1 to each element.
+(Reminder: this should be a pure function that returns a new List!)</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add1</span>(</span>l: <span class="hljs-type">List</span>[<span class="hljs-type">Int</span>]): <span class="hljs-type">List</span>[<span class="hljs-type">Int</span>] = 
+  foldRight(l, <span class="hljs-type">Nil</span>:<span class="hljs-type">List</span>[<span class="hljs-type">Int</span>])((h,t) =&gt; <span class="hljs-type">Cons</span>(h+<span class="hljs-number">1</span>,t))
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.16&apos;</span>, () =&gt; {
+    <span class="hljs-keyword">var</span> plus1 = R.reduce((acc, n) =&gt; acc.concat(n+<span class="hljs-number">1</span>), []);
+
+    <span class="hljs-keyword">var</span> original = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>];
+    expect(plus1(original)).toEqual([<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]);
+    expect(original).toEqual([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#xB6;</a>
+              </div>
+              <h3 id="exerxise-3-17">Exerxise 3.17</h3>
+<p>Write a function that turns each value in a List[Double] into a String. You can use
+the expression d.toString to convert some d: Double to a String.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">doubleToString</span>(</span>l: <span class="hljs-type">List</span>[<span class="hljs-type">Double</span>]): <span class="hljs-type">List</span>[<span class="hljs-type">String</span>] = 
+  foldRight(l, <span class="hljs-type">Nil</span>:<span class="hljs-type">List</span>[<span class="hljs-type">String</span>])((h,t) =&gt; <span class="hljs-type">Cons</span>(h.toString,t))
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.17&apos;</span>, () =&gt; {
+    <span class="hljs-keyword">var</span> doubleToString = R.reduce((acc, n) =&gt; acc.concat(n.toString()), []);
+
+    expect(doubleToString([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])).toEqual([<span class="hljs-string">&apos;1&apos;</span>, <span class="hljs-string">&apos;2&apos;</span>, <span class="hljs-string">&apos;3&apos;</span>]);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-18">Exercise 3.18</h3>
+<p>Write a function map that generalizes modifying each element in a list while maintaining
+the structure of the list. Here is its signature:12
+<code>scala def map[A,B](as: List[A])(f: A =&gt; B): List[B]</code></p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">map</span>[</span><span class="hljs-type">A</span>,<span class="hljs-type">B</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>])(f: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">B</span>): <span class="hljs-type">List</span>[<span class="hljs-type">B</span>] = 
+  foldRight(l, <span class="hljs-type">Nil</span>:<span class="hljs-type">List</span>[<span class="hljs-type">B</span>])((h,t) =&gt; <span class="hljs-type">Cons</span>(f(h),t))
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">map_1</span>[</span><span class="hljs-type">A</span>,<span class="hljs-type">B</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>])(f: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">B</span>): <span class="hljs-type">List</span>[<span class="hljs-type">B</span>] = 
+  foldRightViaFoldLeft(l, <span class="hljs-type">Nil</span>:<span class="hljs-type">List</span>[<span class="hljs-type">B</span>])((h,t) =&gt; <span class="hljs-type">Cons</span>(f(h),t))
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">map_2</span>[</span><span class="hljs-type">A</span>,<span class="hljs-type">B</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>])(f: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">B</span>): <span class="hljs-type">List</span>[<span class="hljs-type">B</span>] = {
+  <span class="hljs-function"><span class="hljs-keyword">val</span> <span class="hljs-title">buf</span> =</span> <span class="hljs-keyword">new</span> collection.mutable.<span class="hljs-type">ListBuffer</span>[<span class="hljs-type">B</span>]
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">go</span>(</span>l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>]): <span class="hljs-type">Unit</span> = l <span class="hljs-keyword">match</span> {
+    <span class="hljs-keyword">case</span> <span class="hljs-type">Nil</span> =&gt; ()
+    <span class="hljs-keyword">case</span> <span class="hljs-type">Cons</span>(h,t) =&gt; buf += f(h); go(t)
+  }
+  go(l)
+  <span class="hljs-type">List</span>(buf.toList: _*) <span class="hljs-comment">// converting from the standard Scala list to the list we&apos;ve defined here</span>
+}
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.18&apos;</span>, () =&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">map</span>(<span class="hljs-params">f, xs</span>) </span>{
+      <span class="hljs-keyword">return</span> R.reduce((acc, x) =&gt; acc.concat(f(x)), [], xs);
+    }
+
+    expect(map(R.add(<span class="hljs-number">10</span>), [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])).toEqual([<span class="hljs-number">11</span>,<span class="hljs-number">12</span>,<span class="hljs-number">13</span>]);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-19">Exercise 3.19</h3>
+<p>Write a function filter that removes elements from a list unless they satisfy a given
+predicate. Use it to remove all odd numbers from a <code>List[Int]</code>.</p>
+<p><code>scala def filter[A](as: List[A])(f: A =&gt; Boolean): List[A]</code></p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">filter</span>[</span><span class="hljs-type">A</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>])(f: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">Boolean</span>): <span class="hljs-type">List</span>[<span class="hljs-type">A</span>] = 
+  foldRight(l, <span class="hljs-type">Nil</span>:<span class="hljs-type">List</span>[<span class="hljs-type">A</span>])((h,t) =&gt; <span class="hljs-keyword">if</span> (f(h)) <span class="hljs-type">Cons</span>(h,t) <span class="hljs-keyword">else</span> t)
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.19&apos;</span>, () =&gt; {
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter</span>(<span class="hljs-params">f, xs</span>) </span>{
+      <span class="hljs-keyword">return</span> R.reduce(
+        (acc, x) =&gt; { 
+          <span class="hljs-keyword">if</span>(f(x)) acc = acc.concat(x);
+          <span class="hljs-keyword">return</span> acc;
+        },
+        [],
+        xs);
+    }
+
+    <span class="hljs-keyword">var</span> isEven = (n) =&gt; n % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>;
+    expect(isEven(<span class="hljs-number">2</span>)).toBeTruthy()
+    expect(isEven(<span class="hljs-number">3</span>)).toBeFalsy()
+    expect(filter(isEven, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>])).toEqual([<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>]);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-20">Exercise 3.20</h3>
+<p>Write a function <code>flatMap</code> that works like map except
+that the function given will return a list instead of a single result,
+and that list should be inserted into the final resulting list.
+Here is its signature:</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">flatMap</span>[</span><span class="hljs-type">A</span>,<span class="hljs-type">B</span>](as: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>])(f: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">List</span>[<span class="hljs-type">B</span>]): <span class="hljs-type">List</span>[<span class="hljs-type">B</span>]
+</code></pre>
+<p>For instance, 
+<code>scala flatMap(List(1,2,3))(i =&gt; List(i,i))</code>
+should result in <code>scala List(1,1,2,2,3,3)</code> . </p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">flatMap</span>[</span><span class="hljs-type">A</span>,<span class="hljs-type">B</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>])(f: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">List</span>[<span class="hljs-type">B</span>]): <span class="hljs-type">List</span>[<span class="hljs-type">B</span>] = 
+  concat(map(l)(f))
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.20&apos;</span>, () =&gt; {
+    <span class="hljs-keyword">var</span> flatMap = (f, xs) =&gt; {
+      <span class="hljs-keyword">return</span> R.reduce(
+        (acc, x) =&gt; acc.concat(f(x)),
+        [],
+        xs);
+    };
+
+    <span class="hljs-keyword">var</span> flatMap2 = (f, xs) =&gt; R.flatten(R.map(f, xs));
+
+    <span class="hljs-keyword">var</span> duplicate = (n) =&gt; [n, n];
+    expect(flatMap(duplicate, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])).toEqual([<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>]);
+    expect(flatMap2(duplicate, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])).toEqual([<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>]);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-21">Exercise 3.21</h3>
+<p>Use <code>flatMap</code> [(<code>R.chain</code>)] to implement <code>filter</code>.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">filterViaFlatMap</span>[</span><span class="hljs-type">A</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>])(f: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">Boolean</span>): <span class="hljs-type">List</span>[<span class="hljs-type">A</span>] =
+  flatMap(l)(a =&gt; <span class="hljs-keyword">if</span> (f(a)) <span class="hljs-type">List</span>(a) <span class="hljs-keyword">else</span> <span class="hljs-type">Nil</span>)
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.21&apos;</span>, () =&gt; {
+    <span class="hljs-keyword">var</span> filter = (f, xs) =&gt; R.chain((x) =&gt; f(x) ? [x] : [], xs);
+
+    <span class="hljs-keyword">var</span> isEven = (n) =&gt; n % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>;
+    expect(isEven(<span class="hljs-number">2</span>)).toBeTruthy()
+    expect(isEven(<span class="hljs-number">3</span>)).toBeFalsy()
+    expect(filter(isEven, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>])).toEqual([<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>]);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-22">Exercise 3.22</h3>
+<p>Write a function that accepts two lists and constructs a new list by 
+adding corresponding elements. For example, 
+<code>scala List(1,2,3)</code>
+and <code>scala List(4,5,6)</code> become <code>scala List(5,7,9)</code>.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">addPairwise</span>(</span>a: <span class="hljs-type">List</span>[<span class="hljs-type">Int</span>], b: <span class="hljs-type">List</span>[<span class="hljs-type">Int</span>]): <span class="hljs-type">List</span>[<span class="hljs-type">Int</span>] = (a,b) <span class="hljs-keyword">match</span> {
+  <span class="hljs-keyword">case</span> (<span class="hljs-type">Nil</span>, _) =&gt; <span class="hljs-type">Nil</span>
+  <span class="hljs-keyword">case</span> (_, <span class="hljs-type">Nil</span>) =&gt; <span class="hljs-type">Nil</span>
+  <span class="hljs-keyword">case</span> (<span class="hljs-type">Cons</span>(h1,t1), <span class="hljs-type">Cons</span>(h2,t2)) =&gt; <span class="hljs-type">Cons</span>(h1+h2, addPairwise(t1,t2))
+}
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.22&apos;</span>, () =&gt; {
+    <span class="hljs-keyword">var</span> t = (l1, l2) =&gt; R.map(R.apply(R.add), R.zip(l1,l2));
+
+    expect(t([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>])).toEqual([<span class="hljs-number">5</span>,<span class="hljs-number">7</span>,<span class="hljs-number">9</span>]);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-23">Exercise 3.23</h3>
+<p>Generalize the function you just wrote so that it&#x2019;s not specific to
+integers or addition. Name your generalized 
+function <code>scala zipWith</code>.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">zipWith</span>[</span><span class="hljs-type">A</span>,<span class="hljs-type">B</span>,<span class="hljs-type">C</span>](a: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>], b: <span class="hljs-type">List</span>[<span class="hljs-type">B</span>])(f: (<span class="hljs-type">A</span>,<span class="hljs-type">B</span>) =&gt; <span class="hljs-type">C</span>): <span class="hljs-type">List</span>[<span class="hljs-type">C</span>] = (a,b) <span class="hljs-keyword">match</span> {
+  <span class="hljs-keyword">case</span> (<span class="hljs-type">Nil</span>, _) =&gt; <span class="hljs-type">Nil</span>
+  <span class="hljs-keyword">case</span> (_, <span class="hljs-type">Nil</span>) =&gt; <span class="hljs-type">Nil</span>
+  <span class="hljs-keyword">case</span> (<span class="hljs-type">Cons</span>(h1,t1), <span class="hljs-type">Cons</span>(h2,t2)) =&gt; <span class="hljs-type">Cons</span>(f(h1,h2), zipWith(t1,t2)(f))
+}
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.23&apos;</span>, () =&gt; {
+    <span class="hljs-keyword">var</span> zipWith = (f, l1, l2) =&gt; R.map(R.apply(f), R.zip(l1, l2));
+
+    expect(zipWith(R.add, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>])).toEqual([<span class="hljs-number">5</span>,<span class="hljs-number">7</span>,<span class="hljs-number">9</span>]);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-24">Exercise 3.24</h3>
+<p>Hard: As an example, implement <code>hasSubsequence</code> for checking 
+whether a <code>List</code> contains another <code>List</code> as a subsequence.
+For instance, <code>List(1,2,3,4)</code> would have 
+<code>List(1,2)</code>, <code>List(2,3)</code>, and <code>List(4)</code> as
+subsequences, among others. You may have some difficulty finding a
+concise purely functional implementation that is also efficient.
+That&#x2019;s okay. Implement the function however comes most naturally. 
+We&#x2019;ll return to this implementation in chapter 5 and hopefully 
+improve on it. Note: Any two values x and y can be compared for
+equality in Scala using the expression x == y.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hasSubsequence</span>[</span><span class="hljs-type">A</span>](sup: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>], sub: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>]): <span class="hljs-type">Boolean</span>
+</code></pre>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">startsWith</span>[</span><span class="hljs-type">A</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>], prefix: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>]): <span class="hljs-type">Boolean</span> = (l,prefix) <span class="hljs-keyword">match</span> {
+  <span class="hljs-keyword">case</span> (_,<span class="hljs-type">Nil</span>) =&gt; <span class="hljs-literal">true</span>
+  <span class="hljs-keyword">case</span> (<span class="hljs-type">Cons</span>(h,t),<span class="hljs-type">Cons</span>(h2,t2)) <span class="hljs-keyword">if</span> h == h2 =&gt; startsWith(t, t2)
+  <span class="hljs-keyword">case</span> _ =&gt; <span class="hljs-literal">false</span>
+}
+<span class="hljs-annotation">@annotation</span>.tailrec
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hasSubsequence</span>[</span><span class="hljs-type">A</span>](l: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>], sub: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>]): <span class="hljs-type">Boolean</span> = l <span class="hljs-keyword">match</span> {
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Nil</span> =&gt; <span class="hljs-literal">false</span>
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Cons</span>(h,t) <span class="hljs-keyword">if</span> startsWith(l, sub) =&gt; <span class="hljs-literal">true</span>
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Cons</span>(h,t) =&gt; hasSubsequence(t, sub)  
+}
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.24&apos;</span>, () =&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">startsWith</span>(<span class="hljs-params">l, sub</span>) </span>{
+      <span class="hljs-keyword">if</span> (R.isEmpty(sub)) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      <span class="hljs-keyword">if</span> (l[<span class="hljs-number">0</span>] === sub[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> startsWith(R.drop(<span class="hljs-number">1</span>, l), R.drop(<span class="hljs-number">1</span>, sub));
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hasSub</span>(<span class="hljs-params">l, sub</span>) </span>{
+      <span class="hljs-keyword">if</span> (R.isEmpty(l)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+      <span class="hljs-keyword">return</span> startsWith(l, sub) || hasSub(R.drop(<span class="hljs-number">1</span>, l), sub);
+    }
+
+    expect(hasSub([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>])).toBeTruthy();
+    expect(hasSub([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])).toBeTruthy();
+    expect(hasSub([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>], [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])).toBeTruthy();
+    
+    expect(hasSub([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>], [<span class="hljs-number">4</span>,<span class="hljs-number">3</span>])).toBeFalsy();
+    expect(hasSub([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>], [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])).toBeFalsy();
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-25">Exercise 3.25</h3>
+<p>Write a function <code>size</code> that counts the number of nodes
+(leaves and branches) in a tree.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.25&apos;</span>, () =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#xB6;</a>
+              </div>
+              <p>For this exercise we need to first define Tree, Leaf, and Branch in
+Javascript. Here is how the book defines it in Scala:</p>
+<pre><code class="lang-scala"><span class="hljs-keyword">sealed</span> <span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Tree</span>[</span>+<span class="hljs-type">A</span>]
+<span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Leaf</span>[</span><span class="hljs-type">A</span>](value: <span class="hljs-type">A</span>) <span class="hljs-keyword">extends</span> <span class="hljs-type">Tree</span>[<span class="hljs-type">A</span>]
+<span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Branch</span>[</span><span class="hljs-type">A</span>](left: <span class="hljs-type">Tree</span>[<span class="hljs-type">A</span>], right: <span class="hljs-type">Tree</span>[<span class="hljs-type">A</span>]) <span class="hljs-keyword">extends</span> <span class="hljs-type">Tree</span>[<span class="hljs-type">A</span>]
+</code></pre>
+<p>In Scala, functions would be able to pattern match the subclasses
+and change behavior based on that. I don&#x2019;t know of a simlar construct
+in Javascript. I&#x2019;m using classes and instanceof, you should let me
+know if there&#x2019;s a better alternative!</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tree</span> </span>{ };
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Leaf</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Tree</span> </span>{
+      constructor(value) { 
+        <span class="hljs-keyword">super</span>();
+        <span class="hljs-keyword">this</span>.value = value; 
+      }
+    }
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Branch</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Tree</span> </span>{
+      constructor(l, r) { 
+        <span class="hljs-keyword">super</span>();
+        <span class="hljs-keyword">this</span>.l = l; 
+        <span class="hljs-keyword">this</span>.r = r;
+      }
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#xB6;</a>
+              </div>
+              <p>Javascript seems nasty and inadequate here. There&#x2019;s too much noise,
+and the lack of types reduces rigor and understanding to new
+readers. Let&#x2019;s try to solve the problem now.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">size</span>(<span class="hljs-params">tree</span>) </span>{
+      <span class="hljs-keyword">if</span> (tree <span class="hljs-keyword">instanceof</span> Leaf) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+      <span class="hljs-keyword">if</span> (tree <span class="hljs-keyword">instanceof</span> Branch) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + size(tree.l) + size(tree.r);
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#xB6;</a>
+              </div>
+              <pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">size</span>[</span><span class="hljs-type">A</span>](t: <span class="hljs-type">Tree</span>[<span class="hljs-type">A</span>]): <span class="hljs-type">Int</span> = t <span class="hljs-keyword">match</span> {
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Leaf</span>(_) =&gt; <span class="hljs-number">1</span>
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Branch</span>(l,r) =&gt; <span class="hljs-number">1</span> + size(l) + size(r)
+}
+</code></pre>
+<p>Visually the Javascript implementation of size is not terrible (but
+the implementation of Tree, Leaf, and Branch are). And even beyond the
+visual aspect, the Scala implementation is guaranteed to have a case
+for any given input. The Javascript implementation would &#x201C;silently&#x201D;
+fail when given, say, a Monkey instead of a Branch.</p>
+<p>This adds to the lack of rigor caused by Javascript&#x2019;s typeless nature.
+I would research for alternatives that compile down to Javascript, but
+I&#x2019;m going to keep this a purely Javascript solution for now.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    <span class="hljs-keyword">var</span> t1 = <span class="hljs-keyword">new</span> Branch(<span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">2</span>), <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">10</span>));
+    expect(size(t1)).toBe(<span class="hljs-number">3</span>);
+    <span class="hljs-keyword">var</span> t2 = <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">1</span>);
+    expect(size(t2)).toBe(<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">var</span> t3 = 
+    <span class="hljs-keyword">new</span> Branch(
+      <span class="hljs-keyword">new</span> Branch(
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">2</span>),
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">10</span>)), 
+      <span class="hljs-keyword">new</span> Branch(
+        <span class="hljs-keyword">new</span> Branch(
+          <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">1</span>),
+          <span class="hljs-keyword">new</span> Branch(
+            <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">898</span>),
+            <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">1209</span>))),
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">7908</span>)));
+    expect(size(t3)).toBe(<span class="hljs-number">11</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#xB6;</a>
+              </div>
+              <p>The Folktale library deals with it by adding a <code>isType</code> 
+method to the super class. For example, the <code>Either</code>
+has subclasses <code>Left</code> and <code>Right</code> and properties 
+<code>isLeft</code> and <code>isRight</code>. In our case, that would add
+even more noise to the Tree/Branch/Leaf implementations, 
+but it does make it a bit nicer to write client implementations.
+Let&#x2019;s try it out.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tree2</span> </span>{
+      static isLeaf() { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; }
+      static isBranch() { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; }
+    };
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Leaf2</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Tree2</span> </span>{
+      static isLeaf() { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+
+      constructor(value) { 
+        <span class="hljs-keyword">super</span>();
+        <span class="hljs-keyword">this</span>.value = value; 
+      }
+    }
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Branch2</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Tree2</span> </span>{
+      static isBranch() { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+
+      constructor(l, r) { 
+        <span class="hljs-keyword">super</span>();
+        <span class="hljs-keyword">this</span>.l = l; 
+        <span class="hljs-keyword">this</span>.r = r;
+      }
+    }
+
+    <span class="hljs-built_in">window</span>.Tree = Tree2;
+    <span class="hljs-built_in">window</span>.Leaf = Leaf2;
+    <span class="hljs-built_in">window</span>.Branch = Branch2;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#xB6;</a>
+              </div>
+              <p>The implementation is slightly nicer, but it does add quite a bit of noise
+to the classes. I&#x2019;m split as to which way to pick, but I don&#x2019;t think
+it&#x2019;s important.</p>
+<p>It may be worth skipping the class definitions to take advantage
+of mixins with the prototype. I may look into this at a later point.
+The idea is there may be a mixin we can write that adds this details
+to the prototype of any class automatically.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">size2</span>(<span class="hljs-params">tree</span>) </span>{
+      <span class="hljs-keyword">if</span> (tree.constructor.isLeaf()) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+      <span class="hljs-keyword">if</span> (tree.constructor.isBranch()) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + size2(tree.l) + size2(tree.r);
+    }
+
+    t1 = <span class="hljs-keyword">new</span> Branch2(<span class="hljs-keyword">new</span> Leaf2(<span class="hljs-number">2</span>), <span class="hljs-keyword">new</span> Leaf2(<span class="hljs-number">10</span>));
+    expect(size2(t1)).toBe(<span class="hljs-number">3</span>);
+    t2 = <span class="hljs-keyword">new</span> Leaf2(<span class="hljs-number">1</span>);
+    expect(size2(t2)).toBe(<span class="hljs-number">1</span>);
+    t3 = 
+    <span class="hljs-keyword">new</span> Branch2(
+      <span class="hljs-keyword">new</span> Branch2(
+        <span class="hljs-keyword">new</span> Leaf2(<span class="hljs-number">2</span>),
+        <span class="hljs-keyword">new</span> Leaf2(<span class="hljs-number">10</span>)), 
+      <span class="hljs-keyword">new</span> Branch2(
+        <span class="hljs-keyword">new</span> Branch2(
+          <span class="hljs-keyword">new</span> Leaf2(<span class="hljs-number">1</span>),
+          <span class="hljs-keyword">new</span> Branch2(
+            <span class="hljs-keyword">new</span> Leaf2(<span class="hljs-number">898</span>),
+            <span class="hljs-keyword">new</span> Leaf2(<span class="hljs-number">1209</span>))),
+        <span class="hljs-keyword">new</span> Leaf2(<span class="hljs-number">7908</span>)));
+    expect(size2(t3)).toBe(<span class="hljs-number">11</span>);
+
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-40">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-40">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-26">Exercise 3.26</h3>
+<p>Write a function <code>maximum</code> that returns the maximum element in a
+<code>Tree[Int]</code>.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maximum</span>(</span>t: <span class="hljs-type">Tree</span>[<span class="hljs-type">Int</span>]): <span class="hljs-type">Int</span> = t <span class="hljs-keyword">match</span> {
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Leaf</span>(n) =&gt; n
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Branch</span>(l,r) =&gt; maximum(l) max maximum(r)
+}
+</code></pre>
+<p>Again, same inadequacy as in exercise 3.25. I&#x2019;m not going to keep
+writing about it, but it&#x2019;s something to keep in mind.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.26&apos;</span>, () =&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">maximum</span>(<span class="hljs-params">tree</span>) </span>{
+      <span class="hljs-keyword">if</span> (tree.constructor.isLeaf()) <span class="hljs-keyword">return</span> tree.value;
+      <span class="hljs-keyword">if</span> (tree.constructor.isBranch()) 
+        <span class="hljs-keyword">return</span> R.max(maximum(tree.l), maximum(tree.r));
+    }
+
+    <span class="hljs-keyword">var</span> t1 = <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">4</span>);
+    expect(maximum(t1)).toBe(<span class="hljs-number">4</span>);
+    <span class="hljs-keyword">var</span> t3 = 
+    <span class="hljs-keyword">new</span> Branch(
+      <span class="hljs-keyword">new</span> Branch(
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">20</span>),
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">10</span>)), 
+      <span class="hljs-keyword">new</span> Branch(
+        <span class="hljs-keyword">new</span> Branch(
+          <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">1</span>),
+          <span class="hljs-keyword">new</span> Branch(
+            <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">898</span>),
+            <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">109</span>))),
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">7908</span>)));
+    expect(maximum(t3)).toBe(<span class="hljs-number">7908</span>);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-41">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-27">Exercise 3.27</h3>
+<p>Write a function <code>depth</code> that returns the maximum path length
+from the root of a tree to any leaf.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">depth</span>[</span><span class="hljs-type">A</span>](t: <span class="hljs-type">Tree</span>[<span class="hljs-type">A</span>]): <span class="hljs-type">Int</span> = t <span class="hljs-keyword">match</span> {
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Leaf</span>(_) =&gt; <span class="hljs-number">0</span>
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Branch</span>(l,r) =&gt; <span class="hljs-number">1</span> + (depth(l) max depth(r))
+}
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.27&apos;</span>, () =&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">depth</span>(<span class="hljs-params">tree</span>) </span>{
+      <span class="hljs-keyword">if</span> (tree.constructor.isLeaf()) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+      <span class="hljs-keyword">if</span> (tree.constructor.isBranch())
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + R.max(depth(tree.l), depth(tree.r));
+    }
+
+    <span class="hljs-keyword">var</span> t1 = <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">4</span>);
+    expect(depth(t1)).toBe(<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">var</span> t3 = 
+    <span class="hljs-keyword">new</span> Branch(
+      <span class="hljs-keyword">new</span> Branch(
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">20</span>),
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">10</span>)), 
+      <span class="hljs-keyword">new</span> Branch(
+        <span class="hljs-keyword">new</span> Branch(
+          <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">1</span>),
+          <span class="hljs-keyword">new</span> Branch(
+            <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">898</span>),
+            <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">109</span>))),
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">7908</span>)));
+    expect(depth(t3)).toBe(<span class="hljs-number">4</span>);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-42">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-28">Exercise 3.28</h3>
+<p>Write a function <code>map</code>, analogous to the method of the same name
+on <code>List</code>, that modifies each element in a tree with
+a given function.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">map</span>[</span><span class="hljs-type">A</span>,<span class="hljs-type">B</span>](t: <span class="hljs-type">Tree</span>[<span class="hljs-type">A</span>])(f: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">B</span>): <span class="hljs-type">Tree</span>[<span class="hljs-type">B</span>] = t <span class="hljs-keyword">match</span> {
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Leaf</span>(a) =&gt; <span class="hljs-type">Leaf</span>(f(a))
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Branch</span>(l,r) =&gt; <span class="hljs-type">Branch</span>(map(l)(f), map(r)(f))
+}
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.28&apos;</span>, () =&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">map</span>(<span class="hljs-params">f, tree</span>) </span>{
+      <span class="hljs-keyword">if</span> (tree.constructor.isLeaf())
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Leaf(f(tree.value));
+      <span class="hljs-keyword">if</span> (tree.constructor.isBranch())
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Branch(map(f, tree.l), map(f, tree.r));
+    }
+
+    <span class="hljs-keyword">var</span> t1 = <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">4</span>);
+    expect(map(R.add(<span class="hljs-number">1</span>), t1)).toEqual(<span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">5</span>));
+
+    <span class="hljs-keyword">var</span> t3 = 
+    <span class="hljs-keyword">new</span> Branch(
+      <span class="hljs-keyword">new</span> Branch(
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">20</span>),
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">10</span>)), 
+      <span class="hljs-keyword">new</span> Branch(
+        <span class="hljs-keyword">new</span> Branch(
+          <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">1</span>),
+          <span class="hljs-keyword">new</span> Branch(
+            <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">898</span>),
+            <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">109</span>))),
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">7908</span>)));
+    <span class="hljs-keyword">var</span> t3Plus1 = 
+    <span class="hljs-keyword">new</span> Branch(
+      <span class="hljs-keyword">new</span> Branch(
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">21</span>),
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">11</span>)), 
+      <span class="hljs-keyword">new</span> Branch(
+        <span class="hljs-keyword">new</span> Branch(
+          <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">2</span>),
+          <span class="hljs-keyword">new</span> Branch(
+            <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">899</span>),
+            <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">110</span>))),
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">7909</span>)));
+    expect(map(R.add(<span class="hljs-number">1</span>), t3)).toEqual(t3Plus1);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-43">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-43">&#xB6;</a>
+              </div>
+              <h3 id="exercise-3-29">Exercise 3.29</h3>
+<p>Generalize <code>size</code>, <code>maximum</code>, <code>depth</code>, and
+<code>map</code>, writing a new function <code>fold</code> that abstracts
+over their similarities. Reimplement them in terms of this more
+general function. Can you draw an analogy between this <code>fold</code>
+function and the left and right folds for <code>List</code>?</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 3.29&apos;</span>, () =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-44">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-44">&#xB6;</a>
+              </div>
+              <pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fold</span>[</span><span class="hljs-type">A</span>,<span class="hljs-type">B</span>](t: <span class="hljs-type">Tree</span>[<span class="hljs-type">A</span>])(f: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">B</span>)(g: (<span class="hljs-type">B</span>,<span class="hljs-type">B</span>) =&gt; <span class="hljs-type">B</span>): <span class="hljs-type">B</span> = t <span class="hljs-keyword">match</span> {
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Leaf</span>(a) =&gt; f(a)
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Branch</span>(l,r) =&gt; g(fold(l)(f)(g), fold(r)(f)(g))
+}
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fold</span>(<span class="hljs-params">m, f, tree</span>) </span>{
+      <span class="hljs-keyword">if</span> (tree.constructor.isLeaf())
+        <span class="hljs-keyword">return</span> m(tree);
+      <span class="hljs-keyword">if</span> (tree.constructor.isBranch()){
+        <span class="hljs-keyword">return</span> f(f(m(tree), fold(m, f, tree.l)), fold(m, f, tree.r));
+      }
+    }
+
+    fold = R.curry(fold);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-45">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-45">&#xB6;</a>
+              </div>
+              <pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sizeViaFold</span>[</span><span class="hljs-type">A</span>](t: <span class="hljs-type">Tree</span>[<span class="hljs-type">A</span>]): <span class="hljs-type">Int</span> = 
+  fold(t)(a =&gt; <span class="hljs-number">1</span>)(<span class="hljs-number">1</span> + _ + _)
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    <span class="hljs-keyword">var</span> size = fold(t =&gt; <span class="hljs-number">1</span>)(R.add);
+
+    <span class="hljs-keyword">var</span> t1 = <span class="hljs-keyword">new</span> Branch(<span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">2</span>), <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">10</span>));
+    expect(size(t1)).toBe(<span class="hljs-number">3</span>);
+    <span class="hljs-keyword">var</span> t2 = <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">1</span>);
+    expect(size(t2)).toBe(<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">var</span> t3 = 
+    <span class="hljs-keyword">new</span> Branch(
+      <span class="hljs-keyword">new</span> Branch(
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">2</span>),
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">10</span>)), 
+      <span class="hljs-keyword">new</span> Branch(
+        <span class="hljs-keyword">new</span> Branch(
+          <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">1</span>),
+          <span class="hljs-keyword">new</span> Branch(
+            <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">898</span>),
+            <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">1209</span>))),
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">7908</span>)));
+    expect(size(t3)).toBe(<span class="hljs-number">11</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-46">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-46">&#xB6;</a>
+              </div>
+              <p>I cannot simply use <code>R.prop(&apos;value&apos;)</code> because <code>R.max</code>
+value may be undefined and <code>R.max(undefined, x)</code> is always
+undefined. So I had to default to a minimum value so undefined
+is turned to <code>Number.MIN_VALUE</code>.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maximumViaFold</span>(</span>t: <span class="hljs-type">Tree</span>[<span class="hljs-type">Int</span>]): <span class="hljs-type">Int</span> = 
+  fold(t)(a =&gt; a)(_ max _)
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    <span class="hljs-keyword">var</span> getValue = R.pipe(R.prop(<span class="hljs-string">&apos;value&apos;</span>), R.defaultTo(<span class="hljs-built_in">Number</span>.MIN_VALUE));
+    <span class="hljs-keyword">var</span> maximum = fold(getValue)(R.max);
+    
+
+    <span class="hljs-keyword">var</span> t1 = <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">4</span>);
+    expect(maximum(t1)).toBe(<span class="hljs-number">4</span>);
+    <span class="hljs-keyword">var</span> t3 = 
+    <span class="hljs-keyword">new</span> Branch(
+      <span class="hljs-keyword">new</span> Branch(
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">20</span>),
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">10</span>)), 
+      <span class="hljs-keyword">new</span> Branch(
+        <span class="hljs-keyword">new</span> Branch(
+          <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">1</span>),
+          <span class="hljs-keyword">new</span> Branch(
+            <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">898</span>),
+            <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">109</span>))),
+        <span class="hljs-keyword">new</span> Leaf(<span class="hljs-number">7908</span>)));
+    expect(maximum(t3)).toBe(<span class="hljs-number">7908</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-47">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-47">&#xB6;</a>
+              </div>
+              <p>I thnink this is enough, so I won&#x2019;t continue implementing the other
+functions.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  });
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-48">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-48">&#xB6;</a>
+              </div>
+              <h2 id="chapter-4-handling-errors-without-exceptions">Chapter 4 Handling errors without exceptions</h2>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>
+describe(<span class="hljs-string">&quot;Chapter 4&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-49">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-49">&#xB6;</a>
+              </div>
+              <h3 id="exercise-4-1">Exercise 4.1</h3>
+<p>Implement all of the preceding functions on <code>Option</code> .
+As you implement each function, try to think about what it means and
+in what situations you&#x2019;d use it. We&#x2019;ll explore when
+to use each of these functions next.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 4.1&apos;</span>, () =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-50">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-50">&#xB6;</a>
+              </div>
+              <p>Folktale&#x2019;s <code>data.maybe</code> is the equivalent of 
+<code>Option</code> in scala. I&#x2019;m 
+using <code>data.maybe</code> in most exercises. Here I&#x2019;m implementing 
+it myself to implement the functions that are already in
+<code>data.maybe</code>&#x2018;s prototype.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Maybe</span> </span>{
+      static isNothing() { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; }
+      static isJust() { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-51">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-51">&#xB6;</a>
+              </div>
+              <pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getOrElse</span>[</span><span class="hljs-type">B</span>&gt;:<span class="hljs-type">A</span>](<span class="hljs-keyword">default</span>: =&gt; <span class="hljs-type">B</span>): <span class="hljs-type">B</span> = <span class="hljs-keyword">this</span> <span class="hljs-keyword">match</span> {
+  <span class="hljs-keyword">case</span> <span class="hljs-type">None</span> =&gt; <span class="hljs-keyword">default</span>
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Some</span>(a) =&gt; a
+}
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>      getOrElse(def) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.constructor.isNothing()) <span class="hljs-keyword">return</span> def;
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.constructor.isJust()) <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.value;
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-52">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-52">&#xB6;</a>
+              </div>
+              <pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">orElse_1</span>[</span><span class="hljs-type">B</span>&gt;:<span class="hljs-type">A</span>](ob: =&gt; <span class="hljs-type">Option</span>[<span class="hljs-type">B</span>]): <span class="hljs-type">Option</span>[<span class="hljs-type">B</span>] = <span class="hljs-keyword">this</span> <span class="hljs-keyword">match</span> {
+  <span class="hljs-keyword">case</span> <span class="hljs-type">None</span> =&gt; ob 
+  <span class="hljs-keyword">case</span> _ =&gt; <span class="hljs-keyword">this</span>
+}
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>      orElse(getMaybe) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.constructor.isNothing()) <span class="hljs-keyword">return</span> getMaybe();
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.constructor.isJust()) <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-53">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-53">&#xB6;</a>
+              </div>
+              <pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">map</span>[</span><span class="hljs-type">B</span>](f: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">B</span>): <span class="hljs-type">Option</span>[<span class="hljs-type">B</span>] = <span class="hljs-keyword">this</span> <span class="hljs-keyword">match</span> {
+  <span class="hljs-keyword">case</span> <span class="hljs-type">None</span> =&gt; <span class="hljs-type">None</span>
+  <span class="hljs-keyword">case</span> <span class="hljs-type">Some</span>(a) =&gt; <span class="hljs-type">Some</span>(f(a))
+}
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>      map(f) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.constructor.isNothing()) <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.constructor.isJust()) <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Just(f(<span class="hljs-keyword">this</span>.value));
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-54">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-54">&#xB6;</a>
+              </div>
+              <pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">flatMap</span>[</span><span class="hljs-type">B</span>](f: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">Option</span>[<span class="hljs-type">B</span>]): <span class="hljs-type">Option</span>[<span class="hljs-type">B</span>] = 
+  map(f) getOrElse <span class="hljs-type">None</span>
+</code></pre>
+<p>The above is a better way to solve this problem. And Scala and
+languages where everything is curried lend itself to these type of
+solutions, though it can also be done in Javascript.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>      flatMap(f) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.constructor.isNothing()) <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.constructor.isJust()) <span class="hljs-keyword">return</span> f(<span class="hljs-keyword">this</span>.value);
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-55">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-55">&#xB6;</a>
+              </div>
+              <pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">filter_1</span>(</span>f: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">Boolean</span>): <span class="hljs-type">Option</span>[<span class="hljs-type">A</span>] =
+  flatMap(a =&gt; <span class="hljs-keyword">if</span> (f(a)) <span class="hljs-type">Some</span>(a) <span class="hljs-keyword">else</span> <span class="hljs-type">None</span>)
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>      filter(p) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.flatMap((v) =&gt; p(v) ? <span class="hljs-keyword">new</span> Just(v) : <span class="hljs-keyword">new</span> Nothing());
+      }
+    }
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Nothing</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Maybe</span> </span>{
+      static isNothing() { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+
+      constructor() { <span class="hljs-keyword">super</span>(); }
+    }
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Just</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Maybe</span> </span>{
+      static isJust() { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+
+      constructor(value) {
+        <span class="hljs-keyword">super</span>();
+        <span class="hljs-keyword">this</span>.value = value;
+      }
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-56">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-56">&#xB6;</a>
+              </div>
+              <p>Overall I think the Javascript implementations are good and not
+awkward; it feels like any other functional language.
+My main worry is the lack of rigor that comes with no types.
+The functions that get passed in are expected to have a certain
+signatures but they are not defined explicitely and there&#x2019;s no compiler
+to enforce strictness. This has its advatages, sepcially for fast
+prototypes, but I have found it to be dangerous in large projects.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    expect(<span class="hljs-keyword">new</span> Nothing().getOrElse(<span class="hljs-number">10</span>)).toBe(<span class="hljs-number">10</span>);
+    expect(<span class="hljs-keyword">new</span> Just(<span class="hljs-number">87</span>).getOrElse(<span class="hljs-number">10</span>)).toBe(<span class="hljs-number">87</span>);
+
+    expect(<span class="hljs-keyword">new</span> Nothing().orElse(() =&gt; <span class="hljs-keyword">new</span> Just(<span class="hljs-number">10</span>)).getOrElse(<span class="hljs-number">1</span>))
+      .toEqual(<span class="hljs-number">10</span>);
+    expect(<span class="hljs-keyword">new</span> Just(<span class="hljs-number">33</span>).orElse(() =&gt; <span class="hljs-keyword">new</span> Just(<span class="hljs-number">22</span>)).getOrElse(<span class="hljs-number">1</span>))
+      .toEqual(<span class="hljs-number">33</span>);
+    expect(<span class="hljs-keyword">new</span> Just(<span class="hljs-number">88</span>).orElse(() =&gt; <span class="hljs-keyword">new</span> Nothing()).getOrElse(<span class="hljs-number">1</span>))
+      .toEqual(<span class="hljs-number">88</span>);
+
+    expect(<span class="hljs-keyword">new</span> Nothing().map(v =&gt; v)).toEqual(<span class="hljs-keyword">new</span> Nothing());
+    expect(<span class="hljs-keyword">new</span> Just(<span class="hljs-number">3</span>).map(v =&gt; v + <span class="hljs-number">3</span>)).toEqual(<span class="hljs-keyword">new</span> Just(<span class="hljs-number">6</span>));
+
+    expect(<span class="hljs-keyword">new</span> Nothing().flatMap(v =&gt; <span class="hljs-keyword">new</span> Just(v))).toEqual(<span class="hljs-keyword">new</span> Nothing());
+    expect(<span class="hljs-keyword">new</span> Just(<span class="hljs-number">3</span>).flatMap(v =&gt; <span class="hljs-keyword">new</span> Just(v + <span class="hljs-number">3</span>))).toEqual(<span class="hljs-keyword">new</span> Just(<span class="hljs-number">6</span>));
+    expect(<span class="hljs-keyword">new</span> Just(<span class="hljs-number">3</span>).flatMap(v =&gt; <span class="hljs-keyword">new</span> Nothing())).toEqual(<span class="hljs-keyword">new</span> Nothing());
+
+    expect(<span class="hljs-keyword">new</span> Nothing().filter(R.equals(<span class="hljs-number">1</span>))).toEqual(<span class="hljs-keyword">new</span> Nothing());
+    expect(<span class="hljs-keyword">new</span> Just(<span class="hljs-number">2</span>).filter(R.equals(<span class="hljs-number">1</span>))).toEqual(<span class="hljs-keyword">new</span> Nothing());
+    expect(<span class="hljs-keyword">new</span> Just(<span class="hljs-number">1</span>).filter(R.equals(<span class="hljs-number">1</span>))).toEqual(<span class="hljs-keyword">new</span> Just(<span class="hljs-number">1</span>));
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-57">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-57">&#xB6;</a>
+              </div>
+              <h3 id="exercise-4-2">Exercise 4.2</h3>
+<p>Implement the <code>variance</code> function in terms of <code>flatMap</code>.
+If the mean of a sequence is <code>m</code>, the variance is the mean of
+<code>math.pow(x - m, 2)</code> for each element <code>x</code> in the sequence.
+See the definition of variance on Wikipedia (<a href="http://mng.bz/0Qsr">http://mng.bz/0Qsr</a>).</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">variance</span>(</span>xs: <span class="hljs-type">Seq</span>[<span class="hljs-type">Double</span>]): <span class="hljs-type">Option</span>[<span class="hljs-type">Double</span>]
+</code></pre>
+<pre><code class="lang-scala">
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise 4.2&apos;</span>, () =&gt; {
+
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-58">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-58">&#xB6;</a>
+              </div>
+              <h3 id="exercise">Exercise</h3>
+<pre><code class="lang-scala">
+</code></pre>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  it(<span class="hljs-string">&apos;Exercise &apos;</span>, () =&gt; {
+
+  });
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-59">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-59">&#xB6;</a>
+              </div>
+              <h1 id="todo">TODO</h1>
+<ul>
+<li>Write blog post on setup.</li>
+<li>Write blog post on exercise 3.25 + prototype mixins + other alternatives.</li>
+<li>Could write about exercise in 4.1</li>
+</ul>
+
+            </div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
