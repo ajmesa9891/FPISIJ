@@ -1040,7 +1040,6 @@ describe("Chapter 4", function() {
 
 //TODO
 //=============================================
-// * Write blog post on setup.
 // * Write blog post on exercise 3.25 + prototype mixins + other alternatives.
 // * Write blog post on exercise in 4.1
 // * Use TypeScript and reconsider the type issues.
