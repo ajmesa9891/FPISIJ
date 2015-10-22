@@ -9,6 +9,7 @@
   "scripts": {
     "postinstall": "bower install && npm run generate:bundle",
     "generate:bundle": "browserify libs.js -o bundle.js",
+    "generate:typescript": "tsc exercises.ts --target ES6 --sourceMap",
     "generate:docco": "docco --output \"docco output\" exercises.js",
     "generate:exercises.html": "npm run generate:docco && node start.js",
     "watch-regenerate": "onchange exercises.js -- npm run generate:exercises.html",
@@ -41,6 +42,7 @@
     "livereloadx": "^0.3.8",
     "onchange": "^2.0.0",
     "parallelshell": "^2.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "typescript": "^1.6.2"
   }
 }

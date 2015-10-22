@@ -3,3 +3,5 @@
 /bower_components/*
 exercises.html
 bundle.js
+exercises.js.map
+out.txt

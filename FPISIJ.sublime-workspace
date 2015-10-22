@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"con",
+				"constructor"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"max",
+				"max"
+			],
+			[
+				"start",
+				"startsWith"
+			],
+			[
+				"redu",
+				"reduce"
+			],
+			[
 				"red",
 				"reduce"
 			],
@@ -18,10 +38,6 @@
 			[
 				"conca",
 				"concat"
-			],
-			[
-				"redu",
-				"reduceRightViaLeft"
 			],
 			[
 				"fun",
@@ -103,31 +119,23 @@
 			"file": "exercises.js",
 			"settings":
 			{
-				"buffer_size": 12834,
+				"buffer_size": 37526,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/18.answer.scala",
+			"file": "exercises.ts",
 			"settings":
 			{
-				"buffer_size": 960,
-				"line_ending": "Unix"
+				"buffer_size": 34875,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/17.answer.scala",
+			"file": "package.json",
 			"settings":
 			{
-				"buffer_size": 114,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/16.answer.scala",
-			"settings":
-			{
-				"buffer_size": 88,
+				"buffer_size": 1555,
 				"line_ending": "Unix"
 			}
 		}
@@ -139,10 +147,50 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 353.0,
-		"last_filter": "togg",
+		"height": 185.0,
+		"last_filter": "install",
 		"selected_items":
 		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"toggle",
+				"View: Toggle Tabs"
+			],
+			[
+				"indent",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"covert tab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"tabs",
+				"View: Toggle Tabs"
+			],
+			[
+				"edit pro",
+				"Project: Edit Project"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"to",
+				"Word Wrap: Toggle"
+			],
 			[
 				"togg",
 				"Word Wrap: Toggle"
@@ -166,10 +214,6 @@
 			[
 				"convert to ta",
 				"Indentation: Convert to Tabs"
-			],
-			[
-				"tabs",
-				"View: Toggle Tabs"
 			],
 			[
 				"prefere",
@@ -265,14 +309,31 @@
 	],
 	"file_history":
 	[
+		"/C/proj/FPISIJ/exercises.ts",
+		"/C/proj/FPISIJ/dts/New folder/Ramda.d.ts",
+		"/C/proj/FPISIJ/package.json",
+		"/C/proj/FPISIJ/README.md",
+		"/C/proj/FPISIJ/index.html",
+		"/C/proj/FPISIJ/exercises.js",
+		"/C/proj/FPISIJ/start.js",
+		"/C/proj/FPISIJ/libs.js",
+		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/24.answer.scala",
+		"/C/proj/FPISIJ/FPISIJ.sublime-project",
+		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/23.answer.scala",
+		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/22.answer.scala",
+		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/21.answer.scala",
+		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/22.hint.txt",
+		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/20.answer.scala",
+		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/16.answer.scala",
+		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/17.answer.scala",
+		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/18.answer.scala",
+		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/19.answer.scala",
 		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/14.answer.scala",
 		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/15.answer.scala",
-		"/C/proj/FPISIJ/package.json",
 		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/10.answer.scala",
 		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/11.answer.scala",
 		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/13.hint.txt",
 		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/13.answer.scala",
-		"/C/proj/FPISIJ/start.js",
 		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/12.answer.scala",
 		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/09.answer.scala",
 		"/C/Users/alejandrom/Downloads/fpinscala/Functional Programming in Scala.pdf",
@@ -286,7 +347,6 @@
 		"/C/proj/FPISIJ/docs/exercises.html",
 		"/C/Users/alejandrom/Downloads/fpinscala/answerkey/gettingstarted/01.answer.scala",
 		"/C/proj/FPISIJ/spec/PlayerSpec.js",
-		"/C/proj/FPISIJ/FPISIJ.sublime-project",
 		"/C/proj/angular code school/angular-code-school.sublime-project",
 		"/C/proj/angular code school/app.js",
 		"/C/proj/angular code school/index.html",
@@ -362,6 +422,41 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"window.",
+			"branch",
+			"Javascript",
+			"this",
+			"cury",
+			"var",
+			"= R",
+			"})",
+			"}",
+			"function",
+			") {",
+			"this.",
+			"this.constructor",
+			") {",
+			"//",
+			" * ",
+			"maximum",
+			"Leaf2",
+			"Branch2",
+			"size2",
+			"maximum",
+			"value",
+			"2",
+			"Branch2",
+			"Tree",
+			"todo",
+			"size",
+			"Leaf",
+			"Branch",
+			"var ",
+			"t1",
+			"size",
+			"# ",
+			"[ ]",
+			"hasSub",
 			"flatten",
 			"reduceLeftViaRight",
 			"reverse",
@@ -453,7 +548,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -462,67 +557,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12834,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								12482,
-								12482
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true,
-							"word_wrap": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 7564.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/18.answer.scala",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 960,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								438,
-								960
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"word_wrap": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/17.answer.scala",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 114,
+						"buffer_size": 37526,
 						"regions":
 						{
 						},
@@ -530,12 +565,14 @@
 						[
 							[
 								0,
-								114
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -545,31 +582,63 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "/C/Users/alejandrom/Downloads/fpinscala/answerkey/datastructures/16.answer.scala",
+					"buffer": 1,
+					"file": "exercises.ts",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 88,
+						"buffer_size": 34875,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								88
+								21187,
+								21187
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 13272.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "package.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1555,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								507,
+								507
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -623,6 +692,34 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"exercises.ts",
+				"exercises.ts"
+			],
+			[
+				"exerc.ts",
+				"exercises.ts"
+			],
+			[
+				"pac",
+				"package.json"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"read",
+				"README.md"
+			],
+			[
+				"json",
+				"package.json"
+			],
+			[
+				"start.",
+				"start.js"
+			],
 			[
 				"pack.",
 				"package.json"
@@ -734,10 +831,6 @@
 			[
 				"home",
 				"app\\components\\Home.jsx"
-			],
-			[
-				"pack",
-				"package.json"
 			],
 			[
 				"app",
